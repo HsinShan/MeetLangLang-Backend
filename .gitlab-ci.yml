@@ -43,6 +43,7 @@ dev-api-test:
   only:
     - triggers
   script:
+    - docker-compose down -v
     - docker-compose up -d
     - sleep 30
-    - docker-compose exec mll-apitest npm run apitest
+    - docker exec -i mll-apitest npm run apitest
