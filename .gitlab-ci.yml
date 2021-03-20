@@ -39,9 +39,9 @@ dev-codingstyle-test:
 dev-api-test:
   stage: api-test
   tags:
-    - sdm2021group3-docker
+    - sdm2021group3-vbox
   only:
-    - merge_requests
+    - triggers
   script:
     - docker-compose up -d
     - sleep 30
