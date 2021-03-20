@@ -1,0 +1,30 @@
+stages:
+  - standard-test
+
+dev-commit-test:
+  stage: standard-test
+  image: node:10.17.0
+  tags:
+    - sdm2021group3-docker
+  only:
+    - /^feature\/.*$/
+    - /^bugfix\/.*$/
+    - /^test\/.*$/
+  script:
+    - npm install -g commitlint
+    - npm install --save-dev @commitlint/config-conventional
+    - commitlint --color --from=$(git rev-parse remotes/origin/master)
+
+dev-codingstyle-test:
+  stage: standard-test
+  image: node:10.17.0
+  tags:
+    - sdm2021group3-docker
+  only:
+    - /^feature\/.*$/
+    - /^bugfix\/.*$/
+    - /^test\/.*$/
+  script:
+    - cd ./app
+    - npm install --only=dev
+    - npm run test
