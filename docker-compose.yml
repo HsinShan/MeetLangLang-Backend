@@ -50,3 +50,14 @@ services:
             - "8080:80"
         networks:
             - mll-backend-net
+    mll-apitest:
+        image: node:10.17.0
+        container_name: mll-apitest
+        volumes:
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+            - ./apitest:/apitest
+        networks:
+            - mll-backend-net
+        working_dir: /apitest
+        command: ["sh", "-c", "npm install && tail -F /dev/null"]

@@ -1,5 +1,6 @@
 stages:
   - standard-test
+  - api-test
 
 dev-commit-test:
   stage: standard-test
@@ -29,3 +30,19 @@ dev-codingstyle-test:
     - npm install --only=dev
     - npm install --save-dev lodash
     - npm run test
+    - cd ../
+    - cd ./apitest
+    - npm install --only=dev
+    - npm install --save-dev lodash
+    - npm run standtest
+
+dev-api-test:
+  stage: api-test
+  tags:
+    - sdm2021group3-docker
+  only:
+    - merge_requests
+  script:
+    - docker-compose up -d
+    - sleep 30
+    - docker-compose exec mll-apitest npm run apitest
