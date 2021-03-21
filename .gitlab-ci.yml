@@ -39,7 +39,7 @@ dev-codingstyle-test:
 dev-api-test:
   stage: api-test
   tags:
-    - sdm2021group3-vbox
+    - sdm2021group3-ssh
   only:
     - triggers
   script:
