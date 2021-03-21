@@ -4,7 +4,7 @@ stages:
 
 dev-commit-test:
   stage: standard-test
-  image: node:10.17.0
+  image: sdm2021group3-ci:1.0
   tags:
     - sdm2021group3-docker
   only:
@@ -12,13 +12,11 @@ dev-commit-test:
     - /^bugfix\/.*$/
     - /^test\/.*$/
   script:
-    - npm install -g commitlint
-    - npm install --save-dev @commitlint/config-conventional
     - commitlint --color --from=$(git rev-parse remotes/origin/master)
 
 dev-codingstyle-test:
   stage: standard-test
-  image: node:10.17.0
+  image: sdm2021group3-ci:1.0
   tags:
     - sdm2021group3-docker
   only:
@@ -27,14 +25,10 @@ dev-codingstyle-test:
     - /^test\/.*$/
   script:
     - cd ./app
-    - npm install --only=dev
-    - npm install --save-dev lodash
-    - npm run test
+    - eslint --ext .js ./ --color
     - cd ../
     - cd ./apitest
-    - npm install --only=dev
-    - npm install --save-dev lodash
-    - npm run standtest
+    - eslint --ext .js ./ --color
 
 dev-api-test:
   stage: api-test
