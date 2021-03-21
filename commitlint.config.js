@@ -7,7 +7,7 @@ module.exports = {
             'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore',
         ]],
         'scope-enum': [2, 'always', [
-            'env', 'app', 'db', 'apitest', 'ci',
+            'env', 'app', 'db', 'apitest',
         ]],
         'scope-empty': [2, 'never'],
     },
