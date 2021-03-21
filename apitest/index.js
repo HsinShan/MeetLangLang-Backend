@@ -1,5 +1,7 @@
 const knex = require('knex');
 const knexCleaner = require('knex-cleaner');
+// Load testcases
+const getExampleHello = require('./testcases/example/hello.test.js');
 
 const db = knex({
     client: 'mysql',
@@ -17,4 +19,7 @@ describe('API testing...', () => {
         console.log(host);
         await knexCleaner.clean(db);
     });
+
+    // Test cases
+    describe('GET /example/hello', getExampleHello(db, 'GET', `${host}/example/hello`));
 });
