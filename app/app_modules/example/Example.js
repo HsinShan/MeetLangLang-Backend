@@ -1,6 +1,7 @@
 const express = require('express');
 const Hello = require('./routes/Hello.js');
 const AddTimeToDb = require('./routes/AddTimeToDb.js');
+const GetTimeFromDb = require('./routes/GetTimeFromDb.js');
 
 class Example {
     constructor(app) {
@@ -11,6 +12,7 @@ class Example {
         const router = express.Router();
         router.get('/hello', Hello.route());
         router.post('/time/add', AddTimeToDb.route());
+        router.get('/time/list', GetTimeFromDb.route());
         return router;
     }
 }
