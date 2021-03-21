@@ -1,0 +1,63 @@
+version: "3.5"
+
+networks:
+   mll-backend-net:
+        name: mll-backend-net
+
+services:
+    mll-mysql:
+        image: mysql:5.6.51
+        container_name: mll-mysql
+        restart: always
+        volumes:
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+            - ./db:/docker-entrypoint-initdb.d
+        environment:
+            MYSQL_ROOT_PASSWORD: P@ssWd
+            MYSQL_DATABASE: mllapp
+            MYSQL_USER: app
+            MYSQL_PASSWORD: mllapp
+        command:
+            - "--character-set-server=utf8mb4"
+            - "--collation-server=utf8mb4_unicode_ci"
+        networks:
+            - mll-backend-net
+    mll-api:
+        image: node:10.17.0
+        container_name: mll-api
+        depends_on:
+            - mll-mysql
+        restart: always
+        volumes:
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+            - ./app:/app
+        ports:
+            - "8181:8181"
+        networks:
+            - mll-backend-net
+        working_dir: /app
+        command: ["sh", "-c", "npm install && npm run start"]
+    mll-phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: mll-phpmyadmin
+        restart: always
+        environment:
+            PMA_HOST: mll-mysql
+            PMA_PORT: 3306
+        ports:
+            - "8080:80"
+        networks:
+            - mll-backend-net
+    mll-apitest:
+        image: node:10.17.0
+        container_name: mll-apitest
+        volumes:
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+            - ./apitest:/apitest
+        networks:
+            - mll-backend-net
+        working_dir: /apitest
+        command: ["sh", "-c", "npm install && tail -F /dev/null"]

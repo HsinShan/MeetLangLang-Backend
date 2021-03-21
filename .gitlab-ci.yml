@@ -1,0 +1,49 @@
+stages:
+  - standard-test
+  - api-test
+
+dev-commit-test:
+  stage: standard-test
+  image: node:10.17.0
+  tags:
+    - sdm2021group3-docker
+  only:
+    - /^feature\/.*$/
+    - /^bugfix\/.*$/
+    - /^test\/.*$/
+  script:
+    - npm install -g commitlint
+    - npm install --save-dev @commitlint/config-conventional
+    - commitlint --color --from=$(git rev-parse remotes/origin/master)
+
+dev-codingstyle-test:
+  stage: standard-test
+  image: node:10.17.0
+  tags:
+    - sdm2021group3-docker
+  only:
+    - /^feature\/.*$/
+    - /^bugfix\/.*$/
+    - /^test\/.*$/
+  script:
+    - cd ./app
+    - npm install --only=dev
+    - npm install --save-dev lodash
+    - npm run test
+    - cd ../
+    - cd ./apitest
+    - npm install --only=dev
+    - npm install --save-dev lodash
+    - npm run standtest
+
+dev-api-test:
+  stage: api-test
+  tags:
+    - sdm2021group3-vbox
+  only:
+    - triggers
+  script:
+    - docker-compose down -v
+    - docker-compose up -d
+    - sleep 30
+    - docker exec -i mll-apitest npm run apitest
