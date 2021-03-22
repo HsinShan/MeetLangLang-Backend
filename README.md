@@ -102,12 +102,12 @@ Then go GitLab to check the latest commit is passed the CI checks.<br/>
 If your **commits** are **not passed**, please revise and re-push.<br/>
 If your **commits** are **passed**, you can add new `Merge Request` and **Refresh page to wait new tests**.<br/>
 
-![](docs/images/example-commit-pass.png)
+<img src="./docs/images/example-commit-pass.png" style="border:1px" width="420"/>
 
 If your **Merge Request** is **not passed**, DO NOT merge, please revise and re-push.<br/>
 If your **Merge Request** is **passed**, then you can merge.
 
-![](docs/images/example-mr-pass.png)
+<img src="./docs/images/example-mr-pass.png" style="border:1px" width="420"/>
 
 ## Commit messages
 
