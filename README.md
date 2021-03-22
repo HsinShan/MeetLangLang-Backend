@@ -101,8 +101,13 @@ $ git push --set-upstream origin feature/<example: user-can-login>
 Then go GitLab to check the latest commit is passed the CI checks.<br/>
 If your **commits** are **not passed**, please revise and re-push.<br/>
 If your **commits** are **passed**, you can add new `Merge Request` and **Refresh page to wait new tests**.<br/>
+
+![](docs/images/example-commit-pass.png)
+
 If your **Merge Request** is **not passed**, DO NOT merge, please revise and re-push.<br/>
 If your **Merge Request** is **passed**, then you can merge.
+
+![](docs/images/example-mr-pass.png)
 
 ## Commit messages
 
