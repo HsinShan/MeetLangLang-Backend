@@ -11,7 +11,9 @@ dev-commit-test:
     - /^feature\/.*$/
     - /^bugfix\/.*$/
     - /^test\/.*$/
+    - merge_requests
   script:
+    - git fetch origin master
     - commitlint --color --from=$(git rev-parse remotes/origin/master)
 
 dev-codingstyle-test:
@@ -23,6 +25,7 @@ dev-codingstyle-test:
     - /^feature\/.*$/
     - /^bugfix\/.*$/
     - /^test\/.*$/
+    - merge_requests
   script:
     - cd ./app
     - eslint --ext .js ./ --color
@@ -35,7 +38,7 @@ dev-api-test:
   tags:
     - sdm2021group3-ssh
   only:
-    - triggers
+    - merge_requests
   script:
     - docker-compose down -v
     - docker-compose up -d
