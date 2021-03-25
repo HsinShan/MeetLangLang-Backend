@@ -41,7 +41,8 @@ $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ## Start services
 
 ```
-$ ./tools/dev-start.bash
+$ docker-compose up -d
+$ docker-compose logs -f mll-api
 ```
 
 If services were started, you can try API by accessing `http://localhost:8181/example/hello`.<br/>
@@ -55,25 +56,45 @@ USER: add
 PASSWORD: mllapp
 DB: mllapp
 ```
+## Restart services
+
+You may need to restart the services for each code change.
+
+```
+$ docker-compose restart
+```
+
+## Install libraries of api development
+
+You may need to install 3rd libraries when the function developing.
+
+```
+$ docker-compose exec mll-api npm install --save <Lib>
+```
+
+Example:
+
+$ docker-compose exec mll-api npm install --save axios
 
 ## Stop services
 
 ```
-$ ./tool/dev-stop.bash
+$ docker-compose down -v
 ```
 
-# :zap: Test
+# :zap: (Optional) Test
 
 ## Run standard test locally (e.g. coding style, commit message)
 
 ```
-$ ./tool/dev-test-standard.bash
+$ docker-compose exec mll-api run test
+$ docker-compose exec mll-apitest run standtest
 ```
 
 ## Run api test locally
 
 ```
-$ ./tool/dev-test-api.bash
+$ docker-compose exec mll-apitest npm run apitest
 ```
 
 # :zap: Contribution
