@@ -13,22 +13,24 @@
 
 # :zap: Setup
 
-Ubuntu 18.04 is recommended.
-
 ## System requirements
 
 - Docker
+- Docker-Compose
 
+### Installation of Docker & Docker-Compose
+
+- [Windows 10](https://docs.microsoft.com/zh-tw/windows/wsl/tutorials/wsl-containers)
+- [Mac](https://docs.docker.com/docker-for-mac/install/)
+- Linux (Recommanded)
 ```
+安裝docker
 $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
 $ sudo usermod -aG docker $USER
 $ sudo reboot
-```
 
-- Docker-Compose
-
-```
+安裝docker-compose
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
