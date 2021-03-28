@@ -85,11 +85,11 @@ $ docker-compose down -v
 
 # :zap: (Optional) Test
 
-## Run standard test locally (e.g. coding style, commit message)
+## Run coding-style test locally
 
 ```
-$ docker-compose exec mll-api run test
-$ docker-compose exec mll-apitest run standtest
+$ docker-compose exec mll-api npm run styletest
+$ docker-compose exec mll-apitest npm run styletest
 ```
 
 ## Run api test locally
