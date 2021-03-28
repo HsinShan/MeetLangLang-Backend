@@ -52,10 +52,11 @@ Database info:
 
 ```
 HOST: mll-mysql
-USER: add
+USER: app
 PASSWORD: mllapp
 DB: mllapp
 ```
+
 ## Restart services
 
 You may need to restart the services for each code change.
