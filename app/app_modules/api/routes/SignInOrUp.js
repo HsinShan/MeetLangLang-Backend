@@ -6,11 +6,11 @@ class SignInOrUp {
         return async (req, res, next) => {
             try {
                 const trx = await AppDb.db.transaction();
-                let list = await trx('user').where('Email', req.body.Email).select();
+                let list = await trx('user').where('email', req.body.email).select();
                 if (list.length === 0) {
                     try {
                         await trx('user').insert({
-                            Email: req.body.Email,
+                            email: req.body.email,
                         });
                     } catch (err) {
                         await trx.rollback();
@@ -18,7 +18,7 @@ class SignInOrUp {
                     }
                     await trx.commit();
                 }
-                list = await trx('user').where('Email', req.body.Email).select();
+                list = await trx('user').where('email', req.body.email).select();
                 const payload = { id: list[0].UID };
                 const secret = 'ntusdm2021stoneocean';
                 const token = jwt.sign(payload, secret, { expiresIn: '30 days' });
