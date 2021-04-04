@@ -18,4 +18,4 @@ An example that can add time into database.
 
 |Name|Type|Description|
 |-|-|-|
-|`token`|json|jwt token for user|
+|`token`|string|jwt token for user|
