@@ -24,7 +24,9 @@ class SignInOrUp {
                 const payload = { id: list[0].email };
                 const secret = 'ntusdm2021stoneocean';
                 const token = jwt.sign(payload, secret, { expiresIn: '30 days' });
-                res.status(200).json(token);
+                res.status(200).json({
+                    token,
+                });
             } catch (apiError) {
                 next(apiError);
             }
