@@ -1,4 +1,4 @@
-# POST /api/user/login
+# POST /user/login
 
 An example that can add time into database.
 

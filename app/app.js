@@ -9,7 +9,7 @@ const LogManager = require('./app_modules/system/libs/LogManager.js');
 const AppDb = require('./app_modules/system/libs/AppDb.js');
 // Import `logic-level` modules
 const Example = require('./app_modules/example/Example.js');
-const Api = require('./app_modules/api/Api.js');
+const User = require('./app_modules/user/User.js');
 
 // Setup db instance
 const dbInstance = knex({
@@ -28,7 +28,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 // Setup routers
 app.use('/example', Example.router());
-app.use('/api', Api.router());
+app.use('/user', User.router());
 
 // Setup global error handler, MUST use 4 inputs
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
