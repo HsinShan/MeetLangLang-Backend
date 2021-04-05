@@ -19,7 +19,7 @@ class SignInOrUp {
                     }
                 }
                 await trx.commit();
-                const payload = { id: list[0].UID };
+                const payload = { id: list[0].email };
                 const secret = 'ntusdm2021stoneocean';
                 const token = jwt.sign(payload, secret, { expiresIn: '30 days' });
                 res.status(200).json(token);
