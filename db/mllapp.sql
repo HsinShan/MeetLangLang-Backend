@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 04 月 09 日 12:41
+-- 產生時間： 2021 年 04 月 09 日 17:25
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -36,22 +36,22 @@ CREATE TABLE `example` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `favorite_map`
+-- 資料表結構 `FavoriteMap`
 --
 
-CREATE TABLE `favorite_map` (
+CREATE TABLE `FavoriteMap` (
   `uuid` int(8) NOT NULL,
-  `pet_id` int(10) NOT NULL
+  `petId` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `pet_info`
+-- 資料表結構 `PetInfo`
 --
 
-CREATE TABLE `pet_info` (
-  `pet_id` int(10) NOT NULL,
+CREATE TABLE `PetInfo` (
+  `petId` int(10) NOT NULL,
   `sex` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `kind` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -82,24 +82,23 @@ ALTER TABLE `example`
   ADD PRIMARY KEY (`uuid`);
 
 --
--- 資料表索引 `favorite_map`
+-- 資料表索引 `FavoriteMap`
 --
-ALTER TABLE `favorite_map`
-  ADD PRIMARY KEY (`uuid`,`pet_id`),
-  ADD KEY `pet_id` (`pet_id`);
+ALTER TABLE `FavoriteMap`
+  ADD PRIMARY KEY (`uuid`,`petId`),
+  ADD KEY `petId` (`petId`);
 
 --
--- 資料表索引 `pet_info`
+-- 資料表索引 `PetInfo`
 --
-ALTER TABLE `pet_info`
-  ADD PRIMARY KEY (`pet_id`);
+ALTER TABLE `PetInfo`
+  ADD PRIMARY KEY (`petId`);
 
 --
 -- 資料表索引 `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`uuid`),
-  ADD UNIQUE KEY `unique_user_email` (`email`);
+  ADD PRIMARY KEY (`uuid`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
@@ -112,12 +111,6 @@ ALTER TABLE `example`
   MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `pet_info`
---
-ALTER TABLE `pet_info`
-  MODIFY `pet_id` int(10) NOT NULL AUTO_INCREMENT;
-
---
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
@@ -128,11 +121,11 @@ ALTER TABLE `user`
 --
 
 --
--- 資料表的限制式 `favorite_map`
+-- 資料表的限制式 `FavoriteMap`
 --
-ALTER TABLE `favorite_map`
-  ADD CONSTRAINT `pet_id` FOREIGN KEY (`pet_id`) REFERENCES `pet_info` (`pet_id`),
-  ADD CONSTRAINT `uuid` FOREIGN KEY (`uuid`) REFERENCES `user` (`uuid`);
+ALTER TABLE `FavoriteMap`
+  ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `user` (`uuid`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`petId`) REFERENCES `PetInfo` (`petId`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
