@@ -1,4 +1,4 @@
-# POST /user/login
+# POST /user/fb-login
 
 An example that can add time into database.
 
