@@ -17,7 +17,6 @@ class SignInOrUp {
                         },
                     }
                 );
-                console.log(data);
                 if (!('email' in data)) throw Error('field `email` is missing.');
                 const { email } = data;
                 const trx = await AppDb.db.transaction();
