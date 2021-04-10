@@ -45,7 +45,7 @@ $ docker-compose up -d
 $ docker-compose logs -f mll-api
 ```
 
-If services were started, you can try API by accessing `http://localhost:8181/example/hello`.<br/>
+If services were started, you can try API by accessing `https://localhost:8181/example/hello`.<br/>
 And you can manage the database by logging in `http://localhost:8080`.<br/>
 
 Database info:
