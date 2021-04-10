@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const axios = require('axios');
 const AppDb = require('../../system/libs/AppDb.js');
 
 class SignInOrUp {
@@ -21,7 +20,7 @@ class SignInOrUp {
                         throw err;
                     }
                 }
-                const trx.commit();
+                await trx.commit();
                 const payload = { id: list[0].email };
                 const secret = 'ntusdm2021stoneocean';
                 const token = jwt.sign(payload, secret, { expiresIn: '30 days' });
