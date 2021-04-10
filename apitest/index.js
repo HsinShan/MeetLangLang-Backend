@@ -15,11 +15,11 @@ const db = knex({
         database: 'mllapp',
     },
 });
-const host = 'http://mll-api:8181';
+const host = 'https://mll-api:8181';
+console.log(host);
 
 describe('API testing...', () => {
     beforeEach(async () => {
-        console.log(host);
         await knexCleaner.clean(db);
     });
 
