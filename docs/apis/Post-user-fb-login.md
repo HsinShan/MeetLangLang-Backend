@@ -1,4 +1,4 @@
-# POST /user/login
+# POST /user/fb-login
 
 An example that can add time into database.
 
@@ -12,7 +12,7 @@ An example that can add time into database.
 
 |Name|Type|Description|
 |-|-|-|
-|`email`|string|User's email|
+|`accessToken`|string|access token from Facebook|
 
 ## Response fields
 
