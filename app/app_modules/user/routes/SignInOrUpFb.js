@@ -6,14 +6,25 @@ class SignInOrUp {
     static route() {
         return async (req, res, next) => {
             try {
-                if (!('email' in req.body)) throw Error('field `email` is missing.');
-                const { email } = req.body;
+                if (!('accessToken' in req.body)) throw Error('field `accessToken` is missing.');
+                const { accessToken } = req.body;
+                const { data } = await axios.get(
+                    'https://graph.facebook.com/me',
+                    {
+                        params: {
+                            fields: 'id,email',
+                            access_token: accessToken,
+                        },
+                    }
+                );
+                if (!('email' in data)) throw Error('field `email` is missing.');
+                const { email } = data;
                 const trx = await AppDb.db.transaction();
                 let list = await trx('user').where('email', email).select();
                 if (list.length === 0) {
                     try {
                         await trx('user').insert({
-                            email: req.body.email,
+                            email,
                         });
                         list = await trx('user').where('email', email).select();
                     } catch (err) {
@@ -21,7 +32,7 @@ class SignInOrUp {
                         throw err;
                     }
                 }
-                const trx.commit();
+                await trx.commit();
                 const payload = { id: list[0].email };
                 const secret = 'ntusdm2021stoneocean';
                 const token = jwt.sign(payload, secret, { expiresIn: '30 days' });
