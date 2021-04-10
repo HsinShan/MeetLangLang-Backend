@@ -33,12 +33,17 @@ services:
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
             - ./app:/app
+            - ./localhost.crt:/localhost.crt
+            - ./localhost.key:/localhost.key
         ports:
-            - "8181:8181"
+            - "${APP_PORT}:8181"
         networks:
             - mll-backend-net
         working_dir: /app
-        command: ["sh", "-c", "npm install && npm run start"]
+        command: ["sh", "-c", "npm install && \
+            SSL_CERT_FILE=/localhost.crt \
+            SSL_KEY_FILE=/localhost.key \
+            npm run start"]
     mll-phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
         container_name: mll-phpmyadmin
