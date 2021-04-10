@@ -1,3 +1,5 @@
+const fs = require('fs');
+const https = require('https');
 const express = require('express');
 const cors = require('cors');
 const knex = require('knex');
@@ -43,6 +45,11 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 });
 
 // Run api server
-app.listen(appConfigs.base.port || 8181, () => {
-    LogManager.log(`App is listening on port ${appConfigs.base.port || 8181}!`);
+const port = appConfigs.base.port || 8181;
+const server = https.createServer({
+    key: fs.readFileSync(process.env.SSL_KEY_FILE),
+    cert: fs.readFileSync(process.env.SSL_CERT_FILE),
+}, app);
+server.listen(port, () => {
+    LogManager.log(`App is listening on port ${port} by https!`);
 });
