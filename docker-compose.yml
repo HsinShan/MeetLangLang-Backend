@@ -62,6 +62,8 @@ services:
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
             - ./apitest:/apitest
+        environment:
+            NODE_TLS_REJECT_UNAUTHORIZED: 0
         networks:
             - mll-backend-net
         working_dir: /apitest
