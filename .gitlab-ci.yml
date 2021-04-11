@@ -61,3 +61,6 @@ prod-deploy:
     - echo "remove unused services"
     - docker-compose stop mll-apitest
     - docker-compose rm -f mll-apitest
+    - echo "check logs"
+    - sleep 30
+    - docker-compose logs mll-api
