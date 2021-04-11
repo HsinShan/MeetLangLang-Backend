@@ -55,6 +55,9 @@ prod-deploy:
   script:
     - pwd
     - docker-compose down -v
+    - echo "start services"
+    - mkdir -p app/node_modules/ app/node_modules/.cache/
     - docker-compose up -d
+    - echo "remove unused services"
     - docker-compose stop mll-apitest
     - docker-compose rm -f mll-apitest
