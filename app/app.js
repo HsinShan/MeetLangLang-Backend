@@ -3,6 +3,7 @@ const https = require('https');
 const express = require('express');
 const cors = require('cors');
 const knex = require('knex');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const appConfigs = require('./configs.js');
 // Rewrite console for showing timestamp
 require('console-stamp')(console);
@@ -31,6 +32,16 @@ app.use(express.urlencoded({ extended: true }));
 // Setup routers
 app.use('/example', Example.router());
 app.use('/user', User.router());
+
+// Proxy endpoints
+const ANIMAL_API_SERVICE_URL = 'https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL';
+app.use('/animal/get', createProxyMiddleware({
+    target: ANIMAL_API_SERVICE_URL,
+    changeOrigin: true,
+    pathRewrite: {
+        '^/animal/get': '',
+    },
+}));
 
 // Setup global error handler, MUST use 4 inputs
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
