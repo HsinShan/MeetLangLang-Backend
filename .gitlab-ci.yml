@@ -1,6 +1,7 @@
 stages:
   - standard-test
   - api-test
+  - deploy-prod
 
 dev-commit-test:
   stage: standard-test
@@ -44,3 +45,22 @@ dev-api-test:
     - docker-compose up -d
     - sleep 30
     - docker exec -i mll-apitest npm run apitest
+
+prod-deploy:
+  stage: deploy-prod
+  tags:
+    - sdm2021group3-prodssh
+  only:
+    - web
+  script:
+    - pwd
+    - docker-compose down -v
+    - echo "start services"
+    - mkdir -p app/node_modules/ app/node_modules/.cache/
+    - docker-compose up -d
+    - echo "remove unused services"
+    - docker-compose stop mll-apitest
+    - docker-compose rm -f mll-apitest
+    - echo "check logs"
+    - sleep 30
+    - docker-compose logs mll-api
