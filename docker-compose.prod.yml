@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+    mll-api:
+        volumes:
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+            - ./app:/app
+            - /home/runner/mll-cert/ssl.crt:/localhost.crt
+            - /home/runner/mll-cert/ssl.key:/localhost.key
+        command: ["sh", "-c", "npm install && \
+            SSL_CERT_FILE=/localhost.crt \
+            SSL_KEY_FILE=/localhost.key \
+            npm run start"]

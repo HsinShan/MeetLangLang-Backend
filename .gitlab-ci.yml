@@ -54,13 +54,13 @@ prod-deploy:
     - web
   script:
     - pwd
-    - docker-compose down -v
+    - docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v
     - echo "start services"
     - mkdir -p app/node_modules/ app/node_modules/.cache/
-    - docker-compose up -d
+    - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
     - echo "remove unused services"
-    - docker-compose stop mll-apitest
-    - docker-compose rm -f mll-apitest
+    - docker-compose -f docker-compose.yml -f docker-compose.prod.yml stop mll-apitest
+    - docker-compose -f docker-compose.yml -f docker-compose.prod.yml rm -f mll-apitest
     - echo "check logs"
     - sleep 30
-    - docker-compose logs mll-api
+    - docker-compose -f docker-compose.yml -f docker-compose.prod.yml logs mll-api
