@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const AppDb = require('../../system/libs/AppDb.js');
 
-class SignInOrUp {
+class SignInOrUpFb {
     static route() {
         return async (req, res, next) => {
             try {
@@ -46,4 +46,4 @@ class SignInOrUp {
     }
 }
 
-module.exports = SignInOrUp;
+module.exports = SignInOrUpFb;
