@@ -34,7 +34,7 @@ app.use('/example', Example.router());
 app.use('/user', User.router());
 
 // Proxy endpoints
-const ANIMAL_API_SERVICE_URL = 'https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL';
+const ANIMAL_API_SERVICE_URL = 'https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=1000';
 app.use('/animal/get', createProxyMiddleware({
     target: ANIMAL_API_SERVICE_URL,
     changeOrigin: true,
