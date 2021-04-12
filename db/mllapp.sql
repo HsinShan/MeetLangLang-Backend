@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 04 月 09 日 17:25
+-- 產生時間： 2021 年 04 月 12 日 15:48
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -62,13 +62,13 @@ CREATE TABLE `PetInfo` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `user`
+-- 資料表結構 `User`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `User` (
   `uuid` int(8) NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sso_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `ssoid` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -95,9 +95,9 @@ ALTER TABLE `PetInfo`
   ADD PRIMARY KEY (`petId`);
 
 --
--- 資料表索引 `user`
+-- 資料表索引 `User`
 --
-ALTER TABLE `user`
+ALTER TABLE `User`
   ADD PRIMARY KEY (`uuid`);
 
 --
@@ -111,9 +111,9 @@ ALTER TABLE `example`
   MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `user`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `User`
 --
-ALTER TABLE `user`
+ALTER TABLE `User`
   MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT;
 
 --
@@ -124,7 +124,7 @@ ALTER TABLE `user`
 -- 資料表的限制式 `FavoriteMap`
 --
 ALTER TABLE `FavoriteMap`
-  ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `user` (`uuid`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`petId`) REFERENCES `PetInfo` (`petId`) ON UPDATE CASCADE;
 COMMIT;
 
