@@ -40,6 +40,7 @@ class SignInOrUpFb {
                 };
                 const { secret, expiresIn } = appConfigs.token;
                 const token = jwt.sign(payload, secret, { expiresIn });
+
                 res.status(200).json({
                     token,
                 });

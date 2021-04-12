@@ -25,11 +25,19 @@ class SignInOrUp {
                 }
                 await trx.commit();
                 const payload = {
+<<<<<<< HEAD
                     uuid: list[0].uuid,
                     email: list[0].email,
                 };
                 const { secret, expiresIn } = appConfigs.token;
                 const token = jwt.sign(payload, secret, { expiresIn });
+=======
+                    id: list[0].email,
+                    uuid: list[0].uuid
+                };
+                const secret = 'ntusdm2021stoneocean';
+                const token = jwt.sign(payload, secret, { expiresIn: '30 days' });
+>>>>>>> 0dbb44f... feat: modify savepet api, added uuid into token
                 res.status(200).json({
                     token,
                 });
