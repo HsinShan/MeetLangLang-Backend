@@ -36,7 +36,7 @@ class SavePet {
                 }
                 await trx.commit();
                 res.status(200).json({
-                    "success": "success"
+                    success: true
                 });
             } catch (apiError) {
                 next(apiError);
