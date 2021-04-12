@@ -20,13 +20,13 @@ class SignInOrUpFb {
                 if (!('email' in data)) throw Error('field `email` is missing.');
                 const { email } = data;
                 const trx = await AppDb.db.transaction();
-                let list = await trx('user').where('email', email).select();
+                let list = await trx('User').where('email', email).select();
                 if (list.length === 0) {
                     try {
-                        await trx('user').insert({
+                        await trx('User').insert({
                             email,
                         });
-                        list = await trx('user').where('email', email).select();
+                        list = await trx('User').where('email', email).select();
                     } catch (err) {
                         await trx.rollback();
                         throw err;
