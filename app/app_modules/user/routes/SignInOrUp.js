@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 const AppDb = require('../../system/libs/AppDb.js');
 
 class SignInOrUp {
@@ -7,6 +8,7 @@ class SignInOrUp {
             try {
                 if (!('email' in req.body)) throw Error('field `email` is missing.');
                 const { email } = req.body;
+                if (!validator.isEmail(email)) throw Error('field `email` is not vaild format.');
                 const trx = await AppDb.db.transaction();
                 let list = await trx('User').where('email', email).select();
                 if (list.length === 0) {
