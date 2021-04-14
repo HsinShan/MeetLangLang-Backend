@@ -15,12 +15,17 @@ class SavePet {
                 if (petlist.length === 0) {
                     try {
                         await trx('PetInfo').insert({
+                            uuid: uuid,
                             petId: petId,
                             sex: req.body.sex,
-                            age: req.body.age,
                             kind: req.body.kind,
+                            color: req.body.color,
+                            sterilization: req.body.sterilization,
+                            remark: req.body.remark,
+                            tel: req.body.tel,
                             address: req.body.address,
-                            picture: req.body.picture
+                            place: req.body.place,
+                            picture: req.body.picture,
                         });
                     } catch (err) {
                         await trx.rollback();
