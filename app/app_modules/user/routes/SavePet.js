@@ -15,7 +15,6 @@ class SavePet {
                 if (petlist.length === 0) {
                     try {
                         await trx('PetInfo').insert({
-                            uuid: uuid,
                             petId: petId,
                             sex: req.body.sex,
                             kind: req.body.kind,
