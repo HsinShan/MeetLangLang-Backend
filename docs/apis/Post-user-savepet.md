@@ -1,5 +1,5 @@
 # POST /user/savepet
-A feature that can save user's liked pet to FavoriteMap table and add petInfo to PetInfo table.   
+Function that can save user's liked pet to FavoriteMap table and add petInfo to PetInfo table.   
 
 ## Authentication
 |Method|
