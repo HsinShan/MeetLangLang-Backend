@@ -1,6 +1,6 @@
 # POST /user/login
 
-An example that can add time into database.
+Let users sign in or sign up.
 
 ## Authentication
 
