@@ -13,6 +13,7 @@ class User {
         router.post('/login', SignInOrUp.route());
         router.post('/fb-login', SignInOrUpFb.route());
         router.post('/savepet', SavePet.route());
+        router.get('/savepet', SavePet.route());
         return router;
     }
 }

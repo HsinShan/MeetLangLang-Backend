@@ -4,29 +4,24 @@ class SavePet {
     static route() {
         return async (req, res, next) => {
             try {
-                if (!('type' in req.body)) throw Error('type is missing');
                 if (!('uuid' in req.body)) throw Error('uuid is missing');
                 if (!('petId' in req.body)) throw Error('petId is missing');
                 const trx = await AppDb.db.transaction();
                 const uuid = req.body.uuid;
                 const petId = req.body.petId;
-                console.log(req.body.type);
-
-                if (req.body.type === 'check') {
+                if (req.method === 'GET') {  //check if user has already saved pet
                     try {
-                        //check if user has already saved pet
                         let checklist = await trx('FavoriteMap').where({
                             uuid: uuid,
                             petId: petId
                         }).select();
-                        console.log(checklist);
                         if (checklist.length === 0) {
                             res.status(200).json({
-                                Saved: true,
+                                saved: false,
                             })
                         } else {
                             res.status(200).json({
-                                Saved: false,
+                                saved: true,
                             })
                         }
                     } catch (err) {
@@ -34,9 +29,7 @@ class SavePet {
                     }
                 }
 
-                else {
-                    //insert pet info into petInfo table
-                    console.log(req.body.type);
+                else if (req.method === 'POST'){  //insert pet info into petInfo table
                     let petlist = await trx('PetInfo').where('petId', petId).select();
                     if (petlist.length === 0) {
                         try {
@@ -56,7 +49,6 @@ class SavePet {
                             await trx.rollback();
                             throw err;
                         }
-                        console.log("insert favorite map");
                         //insert uuid & petId into FavoriteMap table
                         try {
                             await trx('FavoriteMap').insert({
