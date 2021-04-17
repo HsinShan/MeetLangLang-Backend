@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 04 月 15 日 09:25
+-- 產生時間： 2021 年 04 月 17 日 11:14
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -52,7 +52,7 @@ CREATE TABLE `FavoriteMap` (
 
 CREATE TABLE `Message` (
   `uuid` int(8) NOT NULL,
-  `time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `time` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
