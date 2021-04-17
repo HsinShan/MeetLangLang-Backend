@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 04 月 12 日 15:48
+-- 產生時間： 2021 年 04 月 17 日 11:14
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -42,6 +42,18 @@ CREATE TABLE `example` (
 CREATE TABLE `FavoriteMap` (
   `uuid` int(8) NOT NULL,
   `petId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `Message`
+--
+
+CREATE TABLE `Message` (
+  `uuid` int(8) NOT NULL,
+  `time` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -87,6 +99,12 @@ ALTER TABLE `example`
 ALTER TABLE `FavoriteMap`
   ADD PRIMARY KEY (`uuid`,`petId`),
   ADD KEY `petId` (`petId`);
+
+--
+-- 資料表索引 `Message`
+--
+ALTER TABLE `Message`
+  ADD PRIMARY KEY (`uuid`,`time`);
 
 --
 -- 資料表索引 `PetInfo`
