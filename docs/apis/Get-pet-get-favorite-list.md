@@ -1,5 +1,5 @@
 # POST /user/savepet
-A function that checks if the user has already saved the pet or not.
+A function that returns user's saved pets' pet info.
 
 ## Authentication
 |Method|
@@ -10,9 +10,9 @@ A function that checks if the user has already saved the pet or not.
 
 |Name|Type|Description|
 |`uuid`|string|user's uuid|
-|`petId`|string|petid received from gov api|
 
 ## Response fields
 
 |Name|Type|Description|
-|`saved`|bool|value to indicate whether save was successful|
+|`petlist`|list|all users saved pets' pet info|
+
