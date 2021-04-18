@@ -8,6 +8,10 @@ const configs = {
         password: 'mllapp',
         database: 'mllapp',
     },
+    token: {
+        secret: 'ntusdm2021stoneocean',
+        expiresIn: '30days',
+    },
 };
 
 module.exports = configs;
