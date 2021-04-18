@@ -4,6 +4,7 @@ const { assert } = require('chai');
 const testCases = (db, method, url) => () => {
     // You can define matched data here
     const shouldMatchedData = {
+        uuid: 1,
         email: 'member1@example.com',
     };
     // Before test case
@@ -29,10 +30,12 @@ const testCases = (db, method, url) => () => {
         const { token } = data;
         const decodedToken = Buffer.from(token.split('.')[1], 'base64').toString();
         const objToken = JSON.parse(decodedToken);
-        assert.isTrue('id' in objToken);
+        assert.isTrue('email' in objToken);
+        assert.isTrue('uuid' in objToken);
         // Test 3
         assert.include(objToken, {
-            id: shouldMatchedData.email,
+            uuid: shouldMatchedData.uuid,
+            email: shouldMatchedData.email,
         });
     };
     // Test case 1
