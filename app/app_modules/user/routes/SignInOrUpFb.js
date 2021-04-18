@@ -34,7 +34,10 @@ class SignInOrUpFb {
                     }
                 }
                 await trx.commit();
-                const payload = { id: list[0].email };
+                const payload = {
+                    uuid: list[0].uuid,
+                    email: list[0].email,
+                };
                 const { secret, expiresIn } = appConfigs.token;
                 const token = jwt.sign(payload, secret, { expiresIn });
                 res.status(200).json({
