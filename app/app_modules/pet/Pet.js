@@ -6,6 +6,7 @@ class Pet {
     constructor(app) {
         this.app = app;
     }
+
     static router() {
         const router = express.Router();
         router.post('/favorites', AddFavorite.route());

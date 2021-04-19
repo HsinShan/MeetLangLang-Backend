@@ -7,14 +7,14 @@ class AddFavorite {
                 if (!('uuid' in req.body)) throw Error('uuid is missing');
                 if (!('petId' in req.body)) throw Error('petId is missing');
                 const trx = await AppDb.db.transaction();
-                const uuid = req.body.uuid;
-                const petId = req.body.petId;
-                //insert pet info into petInfo table
-                let petlist = await trx('PetInfo').where('petId', petId).select();
+                const user = req.body.uuid;
+                const pet = req.body.petId;
+                // insert pet info into petInfo table
+                const petlist = await trx('PetInfo').where('petId', pet).select();
                 if (petlist.length === 0) {
                     try {
                         await trx('PetInfo').insert({
-                            petId: petId,
+                            petId: pet,
                             sex: req.body.sex,
                             kind: req.body.kind,
                             color: req.body.color,
@@ -29,11 +29,11 @@ class AddFavorite {
                         await trx.rollback();
                         throw err;
                     }
-                    //insert uuid & petId into FavoriteMap table
+                    // insert uuid & petId into FavoriteMap table
                     try {
                         await trx('FavoriteMap').insert({
-                            uuid: uuid,
-                            petId: petId
+                            uuid: user,
+                            petId: pet,
                         });
                     } catch (err) {
                         await trx.rollback();
@@ -44,12 +44,11 @@ class AddFavorite {
                         success: true,
                     });
                 }
-            }
-            catch (apiError) {
+            } catch (apiError) {
                 next(apiError);
-            };
+            }
         };
     }
-};
+}
 
 module.exports = AddFavorite;
