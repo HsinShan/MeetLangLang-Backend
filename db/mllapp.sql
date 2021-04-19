@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 04 月 17 日 11:14
+-- 產生時間： 2021 年 04 月 19 日 15:36
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -127,6 +127,12 @@ ALTER TABLE `User`
 --
 ALTER TABLE `example`
   MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `Message`
+--
+ALTER TABLE `Message`
+  MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `User`
