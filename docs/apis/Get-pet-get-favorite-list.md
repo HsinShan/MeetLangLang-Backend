@@ -1,4 +1,4 @@
-# POST /pet/favorites
+# GET /pet/favorites
 A function that returns user's saved pets' pet info.
 
 ## Authentication
@@ -6,10 +6,24 @@ A function that returns user's saved pets' pet info.
 |-|
 |No|
 
+## Headers
+|Name|Type|Description|
+|`token`|string|The logged in user token|
+
+## Query parameters
+
+|Name|Type|Description|
+|-|-|-|
+
+## Path parameters
+
+|Name|Type|Description|
+|-|-|-|
+
 ## JSON body parameters
 
 |Name|Type|Description|
-|`uuid`|string|user's uuid|
+|-|-|-|
 
 ## Response fields
 
