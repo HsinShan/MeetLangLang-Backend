@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 04 月 17 日 11:14
+-- 產生時間： 2021 年 04 月 19 日 13:51
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -52,7 +52,8 @@ CREATE TABLE `FavoriteMap` (
 
 CREATE TABLE `Message` (
   `uuid` int(8) NOT NULL,
-  `time` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -69,6 +70,17 @@ CREATE TABLE `PetInfo` (
   `kind` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `picture` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `Post`
+--
+
+CREATE TABLE `Post` (
+  `uuidUser` int(8) NOT NULL,
+  `uuidMessage` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -104,13 +116,20 @@ ALTER TABLE `FavoriteMap`
 -- 資料表索引 `Message`
 --
 ALTER TABLE `Message`
-  ADD PRIMARY KEY (`uuid`,`time`);
+  ADD PRIMARY KEY (`uuid`) USING BTREE;
 
 --
 -- 資料表索引 `PetInfo`
 --
 ALTER TABLE `PetInfo`
   ADD PRIMARY KEY (`petId`);
+
+--
+-- 資料表索引 `Post`
+--
+ALTER TABLE `Post`
+  ADD PRIMARY KEY (`uuidUser`,`uuidMessage`),
+  ADD KEY `relation Message table` (`uuidMessage`);
 
 --
 -- 資料表索引 `User`
@@ -144,6 +163,13 @@ ALTER TABLE `User`
 ALTER TABLE `FavoriteMap`
   ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`petId`) REFERENCES `PetInfo` (`petId`) ON UPDATE CASCADE;
+
+--
+-- 資料表的限制式 `Post`
+--
+ALTER TABLE `Post`
+  ADD CONSTRAINT `relation Message table` FOREIGN KEY (`uuidMessage`) REFERENCES `Message` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relation User table` FOREIGN KEY (`uuidUser`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
