@@ -10,9 +10,8 @@ class GetFavoriteList {
 
                 // Decode token to get uuid
                 const { token } = req.headers;
-                let userid;
                 const secret = 'ntusdm2021stoneocean';
-                userid = jwt.verify(token, secret).uuid;
+                const userid = jwt.verify(token, secret).uuid;
 
                 // Get petinfo data using uuid
                 const trx = await AppDb.db.transaction();
