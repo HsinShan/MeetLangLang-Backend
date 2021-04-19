@@ -1,6 +1,6 @@
 const express = require('express');
-const AddFavorite = require('./routes/AddFavorite.js');
 const GetFavoriteList = require('./routes/GetFavoriteList.js');
+const AddFavorite = require('./routes/AddFavorite.js');
 
 class Pet {
     constructor(app) {
@@ -9,8 +9,8 @@ class Pet {
 
     static router() {
         const router = express.Router();
-        router.post('/favorites', AddFavorite.route());
         router.get('/favorites', GetFavoriteList.route());
+        router.post('/favorites', AddFavorite.route());
         return router;
     }
 }
