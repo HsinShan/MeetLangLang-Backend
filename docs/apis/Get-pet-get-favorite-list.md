@@ -1,4 +1,4 @@
-# POST /user/savepet
+# POST /pet/favorites
 A function that returns user's saved pets' pet info.
 
 ## Authentication
