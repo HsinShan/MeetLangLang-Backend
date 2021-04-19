@@ -15,11 +15,12 @@ class GetFavoriteList {
                         res.status(200).json({
                             "result": false,
                         })
-                    }
-                    res.status(200).json({
-                        "result": true,
-                        petInfo,
-                    })
+                    } else {
+                        res.status(200).json({
+                            "result": true,
+                            petInfo,
+                        })
+                    };
                 } catch (err) {
                     throw err;
                 }
