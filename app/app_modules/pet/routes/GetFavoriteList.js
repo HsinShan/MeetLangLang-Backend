@@ -11,7 +11,7 @@ class GetFavoriteList {
                         function () {
                             this.select('petId').from('FavoriteMap').where({ uuid: req.body.uuid })
                         });
-                    if (petlist.length === 0) {
+                    if (petInfo.length === 0) {
                         res.status(200).json({
                             "result": false,
                         })
