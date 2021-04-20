@@ -8,18 +8,18 @@ class AddTopic {
                 // Check decoded token
                 if (!('user' in req)) throw Error('token has not been decoded.');
                 // Check required fields
-                if (!('topic' in req.body)) throw Error('field `topic` is missing.');
+                if (!('title' in req.body)) throw Error('field `title` is missing.');
                 if (!('content' in req.body)) throw Error('field `content` is missing.');
                 // Checl formats of required fields
-                const { topic, content } = req.body;
-                if (validator.isEmpty(topic)) throw Error('field `topic` should not be empty.');
+                const { title, content } = req.body;
+                if (validator.isEmpty(title)) throw Error('field `title` should not be empty.');
                 if (validator.isEmpty(content)) throw Error('field `content` should not be empty.');
                 // Logics
                 const { uuid: userId } = req.user;
                 const trx = await AppDb.db.transaction();
                 try {
                     await trx('Message').insert({
-                        title: topic,
+                        title,
                         content,
                         userId,
                     });
