@@ -29,5 +29,5 @@ A function that returns user's saved pets' pet info.
 
 |Name|Type|Description|
 |`result`|bool|indicates whether user has saved pets|
-|`petlist`|list|all users saved pets' pet info|
+|`petlist`|array|all users saved pets' pet info|
 
