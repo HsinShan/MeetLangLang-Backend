@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const appConfigs = require('../../../configs.js');
-
 const AppDb = require('../../system/libs/AppDb.js');
 
 class SignInOrUp {

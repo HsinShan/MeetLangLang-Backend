@@ -6,10 +6,23 @@ A function that can save user's liked pets to FavoriteMap table and add petInfo 
 |-|
 |No|
 
+## Headers
+|Name|Type|Description|
+|`token`|string|The logged in user token|
+
+## Query parameters
+
+|Name|Type|Description|
+|-|-|-|
+
+## Path parameters
+
+|Name|Type|Description|
+|-|-|-|
+
 ## JSON body parameters
 
 |Name|Type|Description|
-|`uuid`|string|user's uuid|
 |`petId`|string|petid received from gov api|
 |`sex`|string|pet sex received from gov api|
 |`kind`|string|pet kind received from gov api|
