@@ -1,15 +1,16 @@
 const AppDb = require('../../system/libs/AppDb.js');
-
 class AddFavorite {
     static route() {
         return async (req, res, next) => {
             try {
-                if (!('token' in req.headers)) throw Error('token is missing');
+                // Check decoded token
+                if (!('user' in req)) throw Error('token has not been decoded.');
+                //Check required fields
                 if (!('petId' in req.body)) throw Error('petId is missing');
                 const trx = await AppDb.db.transaction();
-                const user = req.body.uuid;
+                const userId = req.user.uuid
                 const pet = req.body.petId;
-                // insert pet info into petInfo table
+                // Insert pet info into petInfo table
                 const petlist = await trx('PetInfo').where('petId', pet).select();
                 if (petlist.length === 0) {
                     try {
@@ -29,10 +30,10 @@ class AddFavorite {
                         await trx.rollback();
                         throw err;
                     }
-                    // insert uuid & petId into FavoriteMap table
+                    // Insert uuid & petId into FavoriteMap table
                     try {
                         await trx('FavoriteMap').insert({
-                            uuid: user,
+                            uuid: userId,
                             petId: pet,
                         });
                     } catch (err) {

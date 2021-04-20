@@ -1,4 +1,5 @@
 const express = require('express');
+const AuthMiddleware = require('../user/middlewares/AuthMiddleware.js');
 const GetFavoriteList = require('./routes/GetFavoriteList.js');
 const AddFavorite = require('./routes/AddFavorite.js');
 
@@ -9,8 +10,8 @@ class Pet {
 
     static router() {
         const router = express.Router();
-        router.get('/favorites', GetFavoriteList.route());
-        router.post('/favorites', AddFavorite.route());
+        router.get('/favorites', AuthMiddleware.verify(), GetFavoriteList.route());
+        router.post('/favorites', AuthMiddleware.verify(), AddFavorite.route());
         return router;
     }
 }
