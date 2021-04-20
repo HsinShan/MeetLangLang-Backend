@@ -132,6 +132,12 @@ ALTER TABLE `example`
   MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `Message`
+--
+ALTER TABLE `Message`
+  MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `User`
 --
 ALTER TABLE `User`
