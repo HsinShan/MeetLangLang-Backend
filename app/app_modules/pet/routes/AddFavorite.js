@@ -4,7 +4,7 @@ class AddFavorite {
     static route() {
         return async (req, res, next) => {
             try {
-                if (!('uuid' in req.body)) throw Error('uuid is missing');
+                if (!('token' in req.headers)) throw Error('token is missing');
                 if (!('petId' in req.body)) throw Error('petId is missing');
                 const trx = await AppDb.db.transaction();
                 const user = req.body.uuid;
