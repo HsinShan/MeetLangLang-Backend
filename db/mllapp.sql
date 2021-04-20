@@ -66,11 +66,15 @@ CREATE TABLE `Message` (
 
 CREATE TABLE `PetInfo` (
   `petId` int(10) NOT NULL,
-  `sex` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `age` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kind` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `picture` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `sex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kind` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sterilization` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tel` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `picture` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remark` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
