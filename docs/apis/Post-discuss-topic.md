@@ -27,7 +27,7 @@ Add new topic in discuss with logged in user account.
 
 |Name|Type|Description|
 |-|-|-|
-|`topic`|string|Topic name|
+|`title`|string|Title of topic|
 |`content`|string|Content of topic|
 
 ## Response fields
