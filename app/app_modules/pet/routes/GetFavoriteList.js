@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
 const AppDb = require('../../system/libs/AppDb.js');
+
 class GetFavoriteList {
     static route() {
         return async (req, res, next) => {
@@ -11,7 +11,7 @@ class GetFavoriteList {
                 const trx = await AppDb.db.transaction();
                 const petInfo = await trx('PetInfo').whereIn('petId',
                     function subquery() {
-                        this.select('petId').from('FavoriteMap').where({ uuid:userId });
+                        this.select('petId').from('FavoriteMap').where({ uuid: userId });
                     });
                 if (petInfo.length === 0) {
                     res.status(200).json({

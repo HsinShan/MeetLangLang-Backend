@@ -1,14 +1,15 @@
 const AppDb = require('../../system/libs/AppDb.js');
+
 class AddFavorite {
     static route() {
         return async (req, res, next) => {
             try {
                 // Check decoded token
                 if (!('user' in req)) throw Error('token has not been decoded.');
-                //Check required fields
+                // Check required fields
                 if (!('petId' in req.body)) throw Error('petId is missing');
                 const trx = await AppDb.db.transaction();
-                const userId = req.user.uuid
+                const userId = req.user.uuid;
                 const pet = req.body.petId;
                 // Insert pet info into petInfo table
                 const petlist = await trx('PetInfo').where('petId', pet).select();

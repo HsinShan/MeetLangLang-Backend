@@ -1,7 +1,8 @@
 const express = require('express');
-const AuthMiddleware = require('../user/middlewares/AuthMiddleware.js');
 const GetFavoriteList = require('./routes/GetFavoriteList.js');
 const AddFavorite = require('./routes/AddFavorite.js');
+// Middlewares
+const AuthMiddleware = require('../user/middlewares/AuthMiddleware.js');
 
 class Pet {
     constructor(app) {
