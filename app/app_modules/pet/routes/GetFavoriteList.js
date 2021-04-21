@@ -13,6 +13,7 @@ class GetFavoriteList {
                     function subquery() {
                         this.select('petId').from('FavoriteMap').where({ uuid: userId });
                     });
+                await trx.commit();
                 if (petInfo.length === 0) {
                     res.status(200).json({
                         result: false,
