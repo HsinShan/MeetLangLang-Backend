@@ -32,19 +32,19 @@ const testCases = (db, method, url) => () => {
 
     it('Check response when having data in DB', async () => {
         // before this case
-        before(async () =>{
+        before(async () => {
             await db('User').insert({
                 email: 'example@gmail.com',
                 ssoId: 'ssoId_example',
             });
-    
+
             await db('Message').insert({
                 userId: 1,
                 time: shouldMatchedData.date,
                 content: 'content_example',
                 title: 'title_example',
             });
-        })
+        });
         // Define request data here
         const reqData = {};
         // Call api
