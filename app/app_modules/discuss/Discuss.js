@@ -12,7 +12,7 @@ class Discuss {
     static router() {
         const router = express.Router();
         router.post('/topic', AuthMiddleware.verify(), AddTopic.route());
-        router.get('/topic/get', GetTopic.route());
+        router.get('/topic/list', GetTopic.route());
         return router;
     }
 }
