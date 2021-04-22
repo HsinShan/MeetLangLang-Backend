@@ -5,7 +5,7 @@ const testCases = (db, method, url) => () => {
     // You can define matched data here
     const shouldMatchedData = {
         key: 1,
-        Title: 'title_example',
+        Title: 'exampleTitle',
         date: new Date().toISOString(),
         author: 'example@gmail.com',
         // author: 先用email代替,
@@ -27,7 +27,7 @@ const testCases = (db, method, url) => () => {
         // Test
         // See: https://www.chaijs.com/api/assert/
         assert.isArray(data);
-        assert.include(data, []);
+        assert.isEmpty(data);
     });
 
     it('Check response when having data in DB', async () => {
@@ -35,14 +35,14 @@ const testCases = (db, method, url) => () => {
         before(async () => {
             await db('User').insert({
                 email: 'example@gmail.com',
-                ssoId: 'ssoId_example',
+                ssoId: 'exampleSsoId',
             });
 
             await db('Message').insert({
                 userId: 1,
                 time: shouldMatchedData.date,
-                content: 'content_example',
-                title: 'title_example',
+                content: 'exampleContent',
+                title: 'exampleTitle',
             });
         });
         // Define request data here
