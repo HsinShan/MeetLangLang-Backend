@@ -5,7 +5,7 @@ const testCases = (db, method, url) => () => {
     // You can define matched data here
     const shouldMatchedData = {
         key: 1,
-        Title: 'exampleTitle',
+        title: 'exampleTitle',
         date: new Date().toISOString(),
         author: 'example@gmail.com',
         // author: 先用email代替,
@@ -58,7 +58,7 @@ const testCases = (db, method, url) => () => {
         assert.isArray(data);
         assert.include(data[0], {
             key: shouldMatchedData.key,
-            Title: shouldMatchedData.Title,
+            title: shouldMatchedData.Title,
             date: shouldMatchedData.date,
             author: shouldMatchedData.author,
         });
