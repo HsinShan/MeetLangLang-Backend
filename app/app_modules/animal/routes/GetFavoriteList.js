@@ -7,23 +7,16 @@ class GetFavoriteList {
                 // Check decoded token
                 if (!('user' in req)) throw Error('token has not been decoded.');
                 const userId = req.user.uuid;
-                // Get petinfo data using uuid
+                // Get animal info data using uuid
                 const trx = await AppDb.db.transaction();
-                const petInfo = await trx('PetInfo').whereIn('petId',
+                const animalInfo = await trx('AnimalInfo').whereIn('animal_id',
                     function subquery() {
-                        this.select('petId').from('FavoriteMap').where({ uuid: userId });
+                        this.select('animal_id').from('FavoriteMap').where({ uuid: userId });
                     });
                 await trx.commit();
-                if (petInfo.length === 0) {
-                    res.status(200).json({
-                        result: false,
-                    });
-                } else {
-                    res.status(200).json({
-                        result: true,
-                        petInfo,
-                    });
-                }
+                res.status(200).json({
+                    animalInfo,
+                });
             } catch (apiError) {
                 next(apiError);
             }

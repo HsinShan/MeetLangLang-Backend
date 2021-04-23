@@ -14,7 +14,7 @@ const AppDb = require('./app_modules/system/libs/AppDb.js');
 const Example = require('./app_modules/example/Example.js');
 const User = require('./app_modules/user/User.js');
 const Discuss = require('./app_modules/discuss/Discuss.js');
-const Pet = require('./app_modules/pet/Pet.js');
+const Animal = require('./app_modules/animal/Animal.js');
 
 // Setup db instance
 const dbInstance = knex({
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/example', Example.router());
 app.use('/user', User.router());
 app.use('/discuss', Discuss.router());
-app.use('/pet', Pet.router());
+app.use('/animal', Animal.router());
 
 // Proxy endpoints
 const ANIMAL_API_SERVICE_URL = 'https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=1000';
