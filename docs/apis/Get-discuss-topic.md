@@ -28,6 +28,6 @@ An example that can return the saved timestamps from database.
 |Name|Type|Description|
 |-|-|-|
 |`[].key`|string|The uuid of topic data|
-|`[].Title`|string|Title fo topic|
+|`[].title`|string|Title fo topic|
 |`[].date`|string|The date of the topic be saved|
 |`[].author`|string|Author of the topic|
