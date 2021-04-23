@@ -8,6 +8,7 @@ A function that returns user's saved pets' pet info.
 
 ## Headers
 |Name|Type|Description|
+|-|-|-|
 |`token`|string|The logged in user token|
 
 ## Query parameters
@@ -28,6 +29,6 @@ A function that returns user's saved pets' pet info.
 ## Response fields
 
 |Name|Type|Description|
-|`result`|bool|indicates whether user has saved pets|
+|-|-|-|
 |`petlist`|array|all users saved pets' pet info|
 

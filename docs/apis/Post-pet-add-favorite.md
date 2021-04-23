@@ -8,6 +8,7 @@ A function that can save user's liked pets to FavoriteMap table and add petInfo 
 
 ## Headers
 |Name|Type|Description|
+|-|-|-|
 |`token`|string|The logged in user token|
 
 ## Query parameters
@@ -23,6 +24,7 @@ A function that can save user's liked pets to FavoriteMap table and add petInfo 
 ## JSON body parameters
 
 |Name|Type|Description|
+|-|-|-|
 |`petId`|string|petid received from gov api|
 |`sex`|string|pet sex received from gov api|
 |`kind`|string|pet kind received from gov api|
@@ -37,4 +39,5 @@ A function that can save user's liked pets to FavoriteMap table and add petInfo 
 ## Response fields
 
 |Name|Type|Description|
+|-|-|-|
 |`success`|bool|value to indicate whether save was successful|
