@@ -3,7 +3,7 @@ const AppDb = require('../../system/libs/AppDb.js');
 
 class AddTopic {
     static route() {
-        return (req, res, next) => {
+        return async (req, res, next) => {
             try {
                 // Check decoded token
                 if (!('user' in req)) throw Error('token has not been decoded.');
@@ -15,9 +15,8 @@ class AddTopic {
                 if (validator.isEmpty(title)) throw Error('field `title` should not be empty.');
                 if (validator.isEmpty(content)) throw Error('field `content` should not be empty.');
                 // Logics
-                //const { uuid: userId } = req.user;
-                const { uuid } = req.user;
-                /*const trx = await AppDb.db.transaction();
+                const { uuid: userId } = req.user;
+                const trx = await AppDb.db.transaction();
                 try {
                     await trx('Message').insert({
                         title,
@@ -28,12 +27,9 @@ class AddTopic {
                     await trx.rollback();
                     throw err;
                 }
-                await trx.commit();*/
+                await trx.commit();
                 res.status(200).json({
                     success: true,
-                    header: req.headers,
-                    body: req.body,
-                    user: req.user
                 });
             } catch (apiError) {
                 next(apiError);
