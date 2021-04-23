@@ -10,7 +10,7 @@ class AddTopic {
                 // Check required fields
                 if (!('title' in req.body)) throw Error('field `title` is missing.');
                 if (!('content' in req.body)) throw Error('field `content` is missing.');
-                // Checl formats of required fields
+                // Check formats of required fields
                 const { title, content } = req.body;
                 if (validator.isEmpty(title)) throw Error('field `title` should not be empty.');
                 if (validator.isEmpty(content)) throw Error('field `content` should not be empty.');

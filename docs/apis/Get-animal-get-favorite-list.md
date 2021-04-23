@@ -1,5 +1,5 @@
 # GET /animal/favorites
-A function that returns user's saved animals' pet info.
+A function that returns all user's saved animals' info.
 
 ## Authentication
 |Method|

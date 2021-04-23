@@ -10,13 +10,12 @@ class AddFavorite {
                 if (!('animalId' in req.body)) throw Error('animalId is missing');
                 const trx = await AppDb.db.transaction();
                 const userId = req.user.uuid;
-                const animalId = req.body.animalId
                 // Insert animal info into animalInfo table
-                const animallist = await trx('AnimalInfo').where('animal_id', animalId).select();
+                const animallist = await trx('AnimalInfo').where('animal_id', req.body.animalId).select();
                 if (animallist.length === 0) {
                     try {
                         await trx('AnimalInfo').insert({
-                            animal_id: animalId,
+                            animal_id: req.body.animalId,
                             animal_sex: req.body.sex,
                             animal_kind: req.body.kind,
                             animal_colour: req.body.colour,
@@ -35,7 +34,7 @@ class AddFavorite {
                     try {
                         await trx('FavoriteMap').insert({
                             uuid: userId,
-                            animal_id: animalId,
+                            animal_id: req.body.animalId,
                         });
                     } catch (err) {
                         await trx.rollback();
