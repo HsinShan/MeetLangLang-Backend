@@ -10,18 +10,19 @@ const testCases = (db, method, url) => () => {
     // Before test case
     beforeEach(async () => {
         // If you want to add sample data into database
+        await db('User').insert({
+            email: 'member1@example.com',
+        });
     });
     // Test case
     it('Check normal response', async () => {
         const jwtToken = jwt.generateUserToken();
-        //console.log(jwtToken);
         // Define test data here
         const testData = {
             userId: 1,
             title: 'testTitle',
             content: 'testContent',
         };
-       // console.log(testData);
         // Call api
         const { data } = await axios({
             method,
