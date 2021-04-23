@@ -58,7 +58,7 @@ const testCases = (db, method, url) => () => {
         assert.isArray(data);
         assert.include(data[0], {
             key: shouldMatchedData.key,
-            title: shouldMatchedData.Title,
+            title: shouldMatchedData.title,
             date: shouldMatchedData.date,
             author: shouldMatchedData.author,
         });
