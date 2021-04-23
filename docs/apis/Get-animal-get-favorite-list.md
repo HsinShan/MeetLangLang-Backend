@@ -1,5 +1,5 @@
-# GET /pet/favorites
-A function that returns user's saved pets' pet info.
+# GET /animal/favorites
+A function that returns user's saved animals' pet info.
 
 ## Authentication
 |Method|
@@ -30,5 +30,5 @@ A function that returns user's saved pets' pet info.
 
 |Name|Type|Description|
 |-|-|-|
-|`petlist`|array|all users saved pets' pet info|
+|`animallist`|array|all users saved animals info|
 

@@ -1,4 +1,4 @@
-# POST /pet/favorites
+# POST /animal/favorites
 A function that can save user's liked pets to FavoriteMap table and add petInfo to PetInfo table.   
 
 ## Authentication
@@ -25,7 +25,7 @@ A function that can save user's liked pets to FavoriteMap table and add petInfo 
 
 |Name|Type|Description|
 |-|-|-|
-|`petId`|string|petid received from gov api|
+|`animalId`|string|petid received from gov api|
 |`sex`|string|pet sex received from gov api|
 |`kind`|string|pet kind received from gov api|
 |`color`|string|pet color received from gov api|
