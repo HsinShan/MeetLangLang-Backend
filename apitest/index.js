@@ -5,6 +5,7 @@ const getExampleHello = require('./testcases/example/hello.test.js');
 const postExampleTimeAdd = require('./testcases/example/time-add.test.js');
 const getExampleTimeList = require('./testcases/example/time-list.test.js');
 const postUserLogin = require('./testcases/user/login.test.js');
+const postDiscussTopicAdd = require('./testcases/discuss/topic-add.test.js');
 
 const db = knex({
     client: 'mysql',
@@ -28,4 +29,5 @@ describe('API testing...', () => {
     describe('POST /example/time/add', postExampleTimeAdd(db, 'POST', `${host}/example/time/add`));
     describe('GET /example/time/list', getExampleTimeList(db, 'GET', `${host}/example/time/list`));
     describe('POST /user/login', postUserLogin(db, 'POST', `${host}/user/login`));
+    describe('POST /discuss/topic', postDiscussTopicAdd(db, 'POST', `${host}/discuss/topic`));
 });
