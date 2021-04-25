@@ -41,7 +41,7 @@ CREATE TABLE `example` (
 
 CREATE TABLE `FavoriteMap` (
   `uuid` int(8) NOT NULL,
-  `petId` int(10) NOT NULL
+  `animal_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -64,17 +64,17 @@ CREATE TABLE `Message` (
 -- 資料表結構 `PetInfo`
 --
 
-CREATE TABLE `PetInfo` (
-  `petId` int(10) NOT NULL,
-  `sex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kind` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sterilization` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tel` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `place` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `picture` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remark` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+CREATE TABLE `AnimalInfo` (
+  `animal_id` int(10) NOT NULL,
+  `animal_sex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_kind` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_colour` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_sterilization` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shelter_tel` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shelter_address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_place` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `album_file` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_remark` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -103,8 +103,8 @@ ALTER TABLE `example`
 -- 資料表索引 `FavoriteMap`
 --
 ALTER TABLE `FavoriteMap`
-  ADD PRIMARY KEY (`uuid`,`petId`),
-  ADD KEY `petId` (`petId`);
+  ADD PRIMARY KEY (`uuid`,`animal_id`),
+  ADD KEY `animal_id` (`animal_id`);
 
 --
 -- 資料表索引 `Message`
@@ -116,8 +116,8 @@ ALTER TABLE `Message`
 --
 -- 資料表索引 `PetInfo`
 --
-ALTER TABLE `PetInfo`
-  ADD PRIMARY KEY (`petId`);
+ALTER TABLE `AnimalInfo`
+  ADD PRIMARY KEY (`animal_id`);
 
 --
 -- 資料表索引 `User`
@@ -156,7 +156,7 @@ ALTER TABLE `User`
 --
 ALTER TABLE `FavoriteMap`
   ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`petId`) REFERENCES `PetInfo` (`petId`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`animal_id`) REFERENCES `AnimalInfo` (`animal_id`) ON UPDATE CASCADE;
 
 --
 -- 資料表的限制式 `Message`

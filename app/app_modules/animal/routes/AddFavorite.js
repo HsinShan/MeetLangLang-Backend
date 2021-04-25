@@ -7,35 +7,34 @@ class AddFavorite {
                 // Check decoded token
                 if (!('user' in req)) throw Error('token has not been decoded.');
                 // Check required fields
-                if (!('petId' in req.body)) throw Error('petId is missing');
+                if (!('animalId' in req.body)) throw Error('animalId is missing');
                 const trx = await AppDb.db.transaction();
                 const userId = req.user.uuid;
-                const pet = req.body.petId;
-                // Insert pet info into petInfo table
-                const petlist = await trx('PetInfo').where('petId', pet).select();
-                if (petlist.length === 0) {
+                // Insert animal info into animalInfo table
+                const animallist = await trx('AnimalInfo').where('animal_id', req.body.animalId).select();
+                if (animallist.length === 0) {
                     try {
-                        await trx('PetInfo').insert({
-                            petId: pet,
-                            sex: req.body.sex,
-                            kind: req.body.kind,
-                            color: req.body.color,
-                            sterilization: req.body.sterilization,
-                            remark: req.body.remark,
-                            tel: req.body.tel,
-                            address: req.body.address,
-                            place: req.body.place,
-                            picture: req.body.picture,
+                        await trx('AnimalInfo').insert({
+                            animal_id: req.body.animalId,
+                            animal_sex: req.body.sex,
+                            animal_kind: req.body.kind,
+                            animal_colour: req.body.colour,
+                            animal_sterilization: req.body.sterilization,
+                            animal_remark: req.body.remark,
+                            shelter_tel: req.body.tel,
+                            shelter_address: req.body.address,
+                            animal_place: req.body.place,
+                            album_file: req.body.picture,
                         });
                     } catch (err) {
                         await trx.rollback();
                         throw err;
                     }
-                    // Insert uuid & petId into FavoriteMap table
+                    // Insert uuid & animalId into FavoriteMap table
                     try {
                         await trx('FavoriteMap').insert({
                             uuid: userId,
-                            petId: pet,
+                            animal_id: req.body.animalId,
                         });
                     } catch (err) {
                         await trx.rollback();

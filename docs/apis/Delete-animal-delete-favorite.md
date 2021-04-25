@@ -1,5 +1,5 @@
-# GET /pet/favorites
-A function that returns user's saved pets' pet info.
+# DELETE /animal/favorites
+A function that can delete animal from users' favorite list and delete info from animalInfo table if needed.
 
 ## Authentication
 |Method|
@@ -8,12 +8,14 @@ A function that returns user's saved pets' pet info.
 
 ## Headers
 |Name|Type|Description|
+|-|-|-|
 |`token`|string|The logged in user token|
 
 ## Query parameters
 
 |Name|Type|Description|
 |-|-|-|
+
 
 ## Path parameters
 
@@ -24,10 +26,10 @@ A function that returns user's saved pets' pet info.
 
 |Name|Type|Description|
 |-|-|-|
+|`animalId`|string|animalid received from gov api|
 
 ## Response fields
 
 |Name|Type|Description|
-|`result`|bool|indicates whether user has saved pets|
-|`petlist`|array|all users saved pets' pet info|
-
+|-|-|-|
+|`success`|bool|value to indicate whether delete was successful|
