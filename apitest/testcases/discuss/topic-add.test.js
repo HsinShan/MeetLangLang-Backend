@@ -32,10 +32,122 @@ const testCases = (db, method, url) => () => {
             },
             data: testData,
         });
-        // Test
         // See: https://www.chaijs.com/api/assert/
-        assert.isObject(data);
-        assert.include(data, shouldMatchedData);
+        // assert.isObject(data);
+        // assert.include(data, shouldMatchedData);
+    });
+    it('token problem.', async () => {
+        const jwtToken = ' ';
+        const testData = {
+            userId: 1,
+            title: 'testTitle',
+            content: 'testContent',
+        };
+        // Call api
+        try {
+            const { data } = await axios({
+                method,
+                url,
+                headers: { 
+                    token: jwtToken
+                },
+                data: testData,
+        });
+        } catch(err){
+            const { response } = err;
+            const { status } = response;
+            assert.notEqual(status, 200);
+        }
+    });
+    it('title is null.', async () => {
+        const jwtToken = jwt.generateUserToken();
+        const testData = {
+            userId: 1,
+            title: '',
+            content: 'testContent',
+        };
+        // Call api
+        try {
+            const { data } = await axios({
+                method,
+                url,
+                headers: { 
+                    token: jwtToken
+                },
+                data: testData,
+        });
+        } catch(err){
+            const { response } = err;
+            const { status } = response;
+            assert.notEqual(status, 200);
+        }
+    });
+    it('content is null.', async () => {
+        const jwtToken = jwt.generateUserToken();
+        const testData = {
+            userId: 1,
+            title: 'testTitle',
+            content: '',
+        };
+        // Call api
+        try {
+            const { data } = await axios({
+                method,
+                url,
+                headers: { 
+                    token: jwtToken
+                },
+                data: testData,
+        });
+        } catch(err){
+            const { response } = err;
+            const { status } = response;
+            assert.notEqual(status, 200);
+        }
+    });
+    it('without title field.', async () => {
+        const jwtToken = jwt.generateUserToken();
+        const testData = {
+            userId: 1,
+            content: 'testContent',
+        };
+        // Call api
+        try {
+            const { data } = await axios({
+                method,
+                url,
+                headers: { 
+                    token: jwtToken
+                },
+                data: testData,
+        });
+        } catch(err){
+            const { response } = err;
+            const { status } = response;
+            assert.notEqual(status, 200);
+        }
+    });
+    it('without content field.', async () => {
+        const jwtToken = jwt.generateUserToken();
+        const testData = {
+            userId: 1,
+            title: 'testTitle',
+        };
+        // Call api
+        try {
+            const { data } = await axios({
+                method,
+                url,
+                headers: { 
+                    token: jwtToken
+                },
+                data: testData,
+        });
+        } catch(err){
+            const { response } = err;
+            const { status } = response;
+            assert.notEqual(status, 200);
+        }
     });
 };
 
