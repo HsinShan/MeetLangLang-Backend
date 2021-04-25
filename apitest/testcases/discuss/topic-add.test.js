@@ -32,7 +32,6 @@ const testCases = (db, method, url) => () => {
             },
             data: testData,
         });
-        console.log(data);
         // Test
         // See: https://www.chaijs.com/api/assert/
         assert.isObject(data);
