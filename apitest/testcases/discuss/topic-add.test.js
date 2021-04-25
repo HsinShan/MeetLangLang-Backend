@@ -5,7 +5,6 @@ const jwt = require('../../libs/mockToken.js');
 const testCases = (db, method, url) => () => {
     // You can define matched data here
     const shouldMatchedData = {
-        success: true,
     };
     // Before test case
     beforeEach(async () => {
@@ -24,19 +23,19 @@ const testCases = (db, method, url) => () => {
             content: 'testContent',
         };
         // Call api
-        const { data } = await axios({
+         const { data }  = await axios({
             method,
             url,
-            headers: { 
+            headers: {
                 token: jwtToken
             },
             data: testData,
         });
-        // See: https://www.chaijs.com/api/assert/
-        // assert.isObject(data);
-        // assert.include(data, shouldMatchedData);
+        assert.isObject(data);
+        assert.include(data, shouldMatchedData);
     });
     it('token problem.', async () => {
+        const { data } = {}
         const jwtToken = ' ';
         const testData = {
             userId: 1,
@@ -45,10 +44,10 @@ const testCases = (db, method, url) => () => {
         };
         // Call api
         try {
-            const { data } = await axios({
+            data = await axios({
                 method,
                 url,
-                headers: { 
+                headers: {
                     token: jwtToken
                 },
                 data: testData,
@@ -60,6 +59,7 @@ const testCases = (db, method, url) => () => {
         }
     });
     it('title is null.', async () => {
+        const { data } = {}
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
@@ -68,10 +68,10 @@ const testCases = (db, method, url) => () => {
         };
         // Call api
         try {
-            const { data } = await axios({
+            data = await axios({
                 method,
                 url,
-                headers: { 
+                headers: {
                     token: jwtToken
                 },
                 data: testData,
@@ -83,6 +83,7 @@ const testCases = (db, method, url) => () => {
         }
     });
     it('content is null.', async () => {
+        const { data } = {}
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
@@ -91,10 +92,10 @@ const testCases = (db, method, url) => () => {
         };
         // Call api
         try {
-            const { data } = await axios({
+            data = await axios({
                 method,
                 url,
-                headers: { 
+                headers: {
                     token: jwtToken
                 },
                 data: testData,
@@ -106,6 +107,7 @@ const testCases = (db, method, url) => () => {
         }
     });
     it('without title field.', async () => {
+        const { data } = {}
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
@@ -113,10 +115,10 @@ const testCases = (db, method, url) => () => {
         };
         // Call api
         try {
-            const { data } = await axios({
+            data = await axios({
                 method,
                 url,
-                headers: { 
+                headers: {
                     token: jwtToken
                 },
                 data: testData,
@@ -128,6 +130,7 @@ const testCases = (db, method, url) => () => {
         }
     });
     it('without content field.', async () => {
+        const { data } = {}
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
@@ -135,10 +138,10 @@ const testCases = (db, method, url) => () => {
         };
         // Call api
         try {
-            const { data } = await axios({
+            data = await axios({
                 method,
                 url,
-                headers: { 
+                headers: {
                     token: jwtToken
                 },
                 data: testData,
