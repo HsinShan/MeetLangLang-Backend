@@ -97,7 +97,7 @@ const testCases = (db, method, url) => () => {
                 },
                 data: testData,
             });
-        } catch(err){
+        } catch (err) {
             const { response } = err;
             const { status } = response;
             assert.notEqual(status, 200);
@@ -118,7 +118,7 @@ const testCases = (db, method, url) => () => {
                     token: jwtToken,
                 },
                 data: testData,
-        });
+            });
         } catch (err) {
             const { response } = err;
             const { status } = response;
