@@ -32,10 +32,7 @@ class AddTopic {
                     success: true,
                 });
             } catch (apiError) {
-                next(apiError)
-                res.status(500).json({
-                    error: apiError,
-                });
+                next(apiError);
             }
         };
     }
