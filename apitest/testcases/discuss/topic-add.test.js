@@ -57,7 +57,7 @@ const testCases = (db, method, url) => () => {
             assert.notEqual(status, 200);
         }
     });
-    it('title is null.', async () => {
+    it('field `title` should not be empty.', async () => {
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
@@ -80,7 +80,7 @@ const testCases = (db, method, url) => () => {
             assert.notEqual(status, 200);
         }
     });
-    it('content is null.', async () => {
+    it('field `content` should not be empty.', async () => {
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
@@ -103,7 +103,7 @@ const testCases = (db, method, url) => () => {
             assert.notEqual(status, 200);
         }
     });
-    it('without title field.', async () => {
+    it('field `title` is missing.', async () => {
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
@@ -125,7 +125,7 @@ const testCases = (db, method, url) => () => {
             assert.notEqual(status, 200);
         }
     });
-    it('without content field.', async () => {
+    it('field `content` is missing.', async () => {
         const jwtToken = jwt.generateUserToken();
         const testData = {
             userId: 1,
