@@ -20,18 +20,18 @@ const testCases = (db, method, url) => () => {
         });
 
         await db('AnimalInfo').insert(
-            {
+            [{
                 animal_id: 123, animal_sex: 'F', animal_kind: '狗', animal_colour: '黑色', animal_sterilization: 'F',
             },
             {
                 animal_id: 456, animal_sex: 'M', animal_kind: '貓',
-            }
+            }]
         );
 
-        await db('FavoriteMap').insert(
+        await db('FavoriteMap').insert([
             { uuid: 1, animal_id: 123 },
-            { uuid: 1, animal_id: 456 }
-        );
+            { uuid: 1, animal_id: 456 },
+        ]);
     });
     // Test case 1
     it('Reject if token is missing', async () => {
