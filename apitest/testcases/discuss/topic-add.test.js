@@ -17,7 +17,6 @@ const testCases = (db, method, url) => () => {
             const jwtToken = jwt.generateUserToken();
             // Define test data here
             const testData = {
-                // userId: 1,
                 title: 'testTitle',
                 content: 'testContent',
             };
@@ -29,8 +28,6 @@ const testCases = (db, method, url) => () => {
                     token: jwtToken,
                 },
                 data: testData,
-            }).catch((err) => {
-                console.log('err', err);
             });
             assert.isObject(data);
             assert.include(data, shouldMatchedData);
@@ -85,7 +82,6 @@ const testCases = (db, method, url) => () => {
     it('field `content` should not be empty.', async () => {
         const jwtToken = jwt.generateUserToken();
         const testData = {
-            userId: 1,
             title: 'testTitle',
             content: '',
         };
