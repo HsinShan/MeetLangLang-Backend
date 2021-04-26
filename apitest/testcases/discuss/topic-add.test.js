@@ -7,7 +7,7 @@ const testCases = (db, method, url) => () => {
     const shouldMatchedData = {
     };
     // Before test case
-    beforeEach(async () => {
+    before(async () => {
         // If you want to add sample data into database
         await db('User').insert({
             email: 'member1@example.com',
@@ -18,7 +18,7 @@ const testCases = (db, method, url) => () => {
         const jwtToken = jwt.generateUserToken();
         // Define test data here
         const testData = {
-            userId: 1,
+            // userId: 1,
             title: 'testTitle',
             content: 'testContent',
         };
