@@ -9,14 +9,11 @@ const testCases = (db, method, url) => () => {
 
     // Positive context
     describe('Positive Testing', () => {
-        // Before test case
-        before(async () => {
-            // If you want to add sample data into database
+        it('Check normal response', async () => {
             await db('User').insert({
                 email: 'member1@example.com',
             });
-        });
-        it('Check normal response', async () => {
+            // Generate token
             const jwtToken = jwt.generateUserToken();
             // Define test data here
             const testData = {
