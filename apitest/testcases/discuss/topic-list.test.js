@@ -6,7 +6,7 @@ const testCases = (db, method, url) => () => {
     const shouldMatchedData = {
         key: 1,
         title: 'exampleTitle',
-        date: new Date().toISOString().substring(0,10),
+        date: new Date().toISOString().substring(0, 10),
         author: 'example@gmail.com',
         // author: 先用email代替,
     };
@@ -58,7 +58,7 @@ const testCases = (db, method, url) => () => {
             title: shouldMatchedData.title,
             author: shouldMatchedData.author,
         });
-        assert.equal(data[0].date.substring(0,10), shouldMatchedData.date);
+        assert.equal(data[0].date.substring(0, 10), shouldMatchedData.date);
     });
 };
 
