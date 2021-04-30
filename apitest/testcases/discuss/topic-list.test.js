@@ -6,7 +6,7 @@ const testCases = (db, method, url) => () => {
     const shouldMatchedData = {
         key: 1,
         title: 'exampleTitle',
-        date: new Date().toISOString(),
+        date: new Date().toISOString().substring(0,10),
         author: 'example@gmail.com',
         // author: 先用email代替,
     };
@@ -32,18 +32,15 @@ const testCases = (db, method, url) => () => {
 
     it('Check response when having data in DB', async () => {
         // before this case
-        before(async () => {
-            await db('User').insert({
-                email: 'example@gmail.com',
-                ssoId: 'exampleSsoId',
-            });
+        await db('User').insert({
+            email: 'example@gmail.com',
+            ssoId: 'exampleSsoId',
+        });
 
-            await db('Message').insert({
-                userId: 1,
-                time: shouldMatchedData.date,
-                content: 'exampleContent',
-                title: 'exampleTitle',
-            });
+        await db('Message').insert({
+            userId: 1,
+            content: 'exampleContent',
+            title: 'exampleTitle',
         });
         // Define request data here
         const reqData = {};
@@ -59,9 +56,9 @@ const testCases = (db, method, url) => () => {
         assert.include(data[0], {
             key: shouldMatchedData.key,
             title: shouldMatchedData.title,
-            date: shouldMatchedData.date,
             author: shouldMatchedData.author,
         });
+        assert.equal(data[0].date.substring(0,10), shouldMatchedData.date);
     });
 };
 
