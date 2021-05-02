@@ -13,19 +13,22 @@ class SignInOrUpFb {
                     'https://graph.facebook.com/me',
                     {
                         params: {
-                            fields: 'id,email',
+                            fields: 'id,email,first_name,name',
                             access_token: accessToken,
                         },
                     }
                 );
                 if (!('email' in data)) throw Error('field `email` is missing.');
-                const { email } = data;
+                if (!('first_name' in data)) throw Error('field `first_name` is missing.');
+                if (!('name' in data)) throw Error('field `name` is missing.');
+                const { email, name } = data;
                 const trx = await AppDb.db.transaction();
                 let list = await trx('User').where('email', email).select();
                 if (list.length === 0) {
                     try {
                         await trx('User').insert({
                             email,
+                            name,
                         });
                         list = await trx('User').where('email', email).select();
                     } catch (err) {
@@ -42,6 +45,7 @@ class SignInOrUpFb {
                 const token = jwt.sign(payload, secret, { expiresIn });
                 res.status(200).json({
                     token,
+                    firstName: data.first_name,
                 });
             } catch (apiError) {
                 next(apiError);
