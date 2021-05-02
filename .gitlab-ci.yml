@@ -3,6 +3,10 @@ stages:
   - api-test
   - deploy-prod
 
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: "tcp://docker:2375"
+
 dev-commit-test:
   stage: standard-test
   image: node:10.17.0
@@ -36,11 +40,16 @@ dev-codingstyle-test:
 
 dev-api-test:
   stage: api-test
-  tags:
-    - sdm2021group3-ssh
+  image: docker/compose:alpine-1.29.1
   only:
     - merge_requests
+  services:
+    - docker:19.03.0-dind
+  before_script:
+    - cat /etc/*elease
   script:
+    - docker ps
+    - echo "Start to exec testings"
     - docker-compose down -v
     - docker-compose up -d
     - sleep 30
