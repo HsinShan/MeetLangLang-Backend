@@ -19,9 +19,7 @@ dev-commit-test:
 
 dev-codingstyle-test:
   stage: standard-test
-  image: sdm2021group3-ci:1.0
-  tags:
-    - sdm2021group3-docker
+  image: node:10.17.0
   only:
     - /^feature\/.*$/
     - /^bugfix\/.*$/
@@ -29,10 +27,12 @@ dev-codingstyle-test:
     - merge_requests
   script:
     - cd ./app
-    - eslint --ext .js ./ --color
+    - npm install
+    - npm run styletest
     - cd ../
     - cd ./apitest
-    - eslint --ext .js ./ --color
+    - npm install
+    - npm run styletest
 
 dev-api-test:
   stage: api-test
