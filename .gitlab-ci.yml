@@ -5,17 +5,17 @@ stages:
 
 dev-commit-test:
   stage: standard-test
-  image: sdm2021group3-ci:1.0
-  tags:
-    - sdm2021group3-docker
+  image: node:10.17.0
   only:
     - /^feature\/.*$/
     - /^bugfix\/.*$/
     - /^test\/.*$/
     - merge_requests
   script:
+    - cd ./
+    - npm install --save-dev commitlint @commitlint/config-conventional
     - git fetch origin master
-    - commitlint --color --from=$(git rev-parse remotes/origin/master)
+    - ./node_modules/.bin/commitlint --color --verbose --from=$(git rev-parse remotes/origin/master)
 
 dev-codingstyle-test:
   stage: standard-test
