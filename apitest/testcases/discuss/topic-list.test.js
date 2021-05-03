@@ -7,7 +7,7 @@ const testCases = (db, method, url) => () => {
         key: 1,
         title: 'exampleTitle',
         date: new Date().toISOString().substring(0, 10),
-        author: 'example@gmail.com',
+        author: 'exampleName',
         // author: 先用email代替,
     };
     // Before test case
@@ -34,6 +34,7 @@ const testCases = (db, method, url) => () => {
         // before this case
         await db('User').insert({
             email: 'example@gmail.com',
+            name: 'exampleName',
             ssoId: 'exampleSsoId',
         });
 
