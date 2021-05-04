@@ -30,6 +30,12 @@ A function with messageId that returns detail of a topic .
 
 |Name|Type|Description|
 |-|-|-|
+|`data`|array|topic details|
+
+### data fields
+
+|Name|Type|Description|
+|-|-|-|
 |`key`|number|Message uuid|
 |`title`|string|Message title|
 |`date`|string|Message time|
