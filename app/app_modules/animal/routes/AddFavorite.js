@@ -28,6 +28,7 @@ class AddFavorite {
                         });
                     } catch (err) {
                         await trx.rollback();
+                        err.errCode = 231;
                         throw err;
                     }
                     // Insert uuid & animalId into FavoriteMap table
@@ -38,6 +39,7 @@ class AddFavorite {
                         });
                     } catch (err) {
                         await trx.rollback();
+                        err.errCode = 232;
                         throw err;
                     }
                     await trx.commit();
@@ -46,6 +48,11 @@ class AddFavorite {
                     });
                 }
             } catch (apiError) {
+                if (apiError.message === 'token has not been decoded.') {
+                    apiError.errCode = 211;
+                } else {
+                    apiError.errCode = 221;
+                }
                 next(apiError);
             }
         };
