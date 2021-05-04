@@ -25,6 +25,7 @@ class AddTopic {
                     });
                 } catch (err) {
                     await trx.rollback();
+                    err.errCode = 331;
                     throw err;
                 }
                 await trx.commit();
@@ -32,6 +33,17 @@ class AddTopic {
                     success: true,
                 });
             } catch (apiError) {
+                if (apiError.message === 'token has not been decoded.') {
+                    apiError.errCode = 311;
+                } else if (apiError.message === 'field `title` is missing.') {
+                    apiError.errCode = 321;
+                } else if (apiError.message === 'field `content` is missing.') {
+                    apiError.errCode = 322;
+                } else if (apiError.message === 'field `title` should not be empty.') {
+                    apiError.errCode = 323;
+                } else if (apiError.message === 'field `content` should not be empty.') {
+                    apiError.errCode = 324;
+                }
                 next(apiError);
             }
         };

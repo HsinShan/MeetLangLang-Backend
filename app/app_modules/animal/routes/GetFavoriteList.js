@@ -18,6 +18,7 @@ class GetFavoriteList {
                     animalInfo,
                 });
             } catch (apiError) {
+                apiError.errCode = 211;
                 next(apiError);
             }
         };

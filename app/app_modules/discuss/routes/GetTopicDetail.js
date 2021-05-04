@@ -10,6 +10,7 @@ class GetTopicDetail {
                     .where({ 'Message.uuid': messageId });
                 res.status(200).json(messageDetail);
             } catch (apiError) {
+                apiError.errCode = 333;
                 next(apiError);
             }
         };

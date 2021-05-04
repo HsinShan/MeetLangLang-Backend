@@ -5,7 +5,7 @@ class DeleteFavorite {
         return async (req, res, next) => {
             try {
                 // Check decoded token
-                if (!('user' in req)) throw Error('Token has not been decoded.');
+                if (!('user' in req)) throw Error('token has not been decoded.');
                 const userId = req.user.uuid;
                 // Check required fields
                 if (!('animalId' in req.body)) throw Error('animalId is missing.');
@@ -21,6 +21,7 @@ class DeleteFavorite {
                     }
                 } catch (err) {
                     await trx.rollback();
+                    err.errCode = 233;
                     throw err;
                 }
                 // Check if need to delete animal in AnimalInfo table
@@ -30,6 +31,7 @@ class DeleteFavorite {
                         await trx('AnimalInfo').where({ animal_id: req.body.animalId }).del();
                     } catch (err) {
                         await trx.rollback();
+                        err.errCode = 234;
                         throw err;
                     }
                 } else {
@@ -40,6 +42,11 @@ class DeleteFavorite {
                     success: true,
                 });
             } catch (apiError) {
+                if (apiError.message === 'token has not been decoded.') {
+                    apiError.errCode = 211;
+                } else {
+                    apiError.errCode = 221;
+                }
                 next(apiError);
             }
         };
