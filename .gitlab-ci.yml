@@ -57,6 +57,7 @@ dev-api-test:
 
 prod-deploy:
   stage: deploy-prod
+  variables: {}
   tags:
     - sdm2021group3-prodssh
   only:
