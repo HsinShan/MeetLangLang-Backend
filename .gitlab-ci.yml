@@ -5,9 +5,6 @@ stages:
 
 dev-commit-test:
   stage: standard-test
-  variables:
-    DOCKER_DRIVER: overlay2
-    DOCKER_HOST: "tcp://docker:2375"
   image: node:10.17.0
   only:
     - /^feature\/.*$/
@@ -22,9 +19,6 @@ dev-commit-test:
 
 dev-codingstyle-test:
   stage: standard-test
-  variables:
-    DOCKER_DRIVER: overlay2
-    DOCKER_HOST: "tcp://docker:2375"
   image: node:10.17.0
   only:
     - /^feature\/.*$/
