@@ -5,23 +5,21 @@ stages:
 
 dev-commit-test:
   stage: standard-test
-  image: sdm2021group3-ci:1.0
-  tags:
-    - sdm2021group3-docker
+  image: node:10.17.0
   only:
     - /^feature\/.*$/
     - /^bugfix\/.*$/
     - /^test\/.*$/
     - merge_requests
   script:
+    - cd ./
+    - npm install --save-dev commitlint @commitlint/config-conventional
     - git fetch origin master
-    - commitlint --color --from=$(git rev-parse remotes/origin/master)
+    - ./node_modules/.bin/commitlint --color --verbose --from=$(git rev-parse remotes/origin/master)
 
 dev-codingstyle-test:
   stage: standard-test
-  image: sdm2021group3-ci:1.0
-  tags:
-    - sdm2021group3-docker
+  image: node:10.17.0
   only:
     - /^feature\/.*$/
     - /^bugfix\/.*$/
@@ -29,18 +27,28 @@ dev-codingstyle-test:
     - merge_requests
   script:
     - cd ./app
-    - eslint --ext .js ./ --color
+    - npm install
+    - npm run styletest
     - cd ../
     - cd ./apitest
-    - eslint --ext .js ./ --color
+    - npm install
+    - npm run styletest
 
 dev-api-test:
   stage: api-test
-  tags:
-    - sdm2021group3-ssh
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: "tcp://docker:2375"
+  image: docker/compose:alpine-1.29.1
   only:
     - merge_requests
+  services:
+    - docker:19.03.0-dind
+  before_script:
+    - cat /etc/*elease
   script:
+    - docker ps
+    - echo "Start to exec testings"
     - docker-compose down -v
     - docker-compose up -d
     - sleep 30

@@ -19,3 +19,4 @@ Let users sign in or sign up by facebook.
 |Name|Type|Description|
 |-|-|-|
 |`token`|string|jwt token for user|
+|`firstName`|string|user's first name|

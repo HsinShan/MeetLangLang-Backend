@@ -17,9 +17,11 @@ class AuthMiddleware {
                     req.user = decodedToken;
                     next();
                 } catch (err) {
+                    err.errCode = 111;
                     res.status(401).json({ message: 'permission denied.' }).end();
                 }
             } catch (err) {
+                err.errCode = 121;
                 next(err);
             }
         };

@@ -8,7 +8,9 @@ const postUserLogin = require('./testcases/user/login.test.js');
 const getAnimalFavorites = require('./testcases/animal/get-favorite.test.js');
 const deleteAnimalFavorites = require('./testcases/animal/delete-favorite.test.js');
 const addAnimalFavorites = require('./testcases/animal/add-favorite.test.js');
+const getDiscussTopic = require('./testcases/discuss/topic-list.test.js');
 const postDiscussTopic = require('./testcases/discuss/topic-add.test.js');
+const getDiscussTopicDetail = require('./testcases/discuss/topic-detail-get.test.js');
 
 const db = knex({
     client: 'mysql',
@@ -35,5 +37,7 @@ describe('API testing...', () => {
     describe('GET /animal/favorites', getAnimalFavorites(db, 'GET', `${host}/animal/favorites`));
     describe('DELETE /animal/favorites', deleteAnimalFavorites(db, 'DELETE', `${host}/animal/favorites`));
     describe('POST /animal/favorites', addAnimalFavorites(db, 'POST', `${host}/animal/favorites`));
+    describe('GET /discuss/topic/list', getDiscussTopic(db, 'GET', `${host}/discuss/topic/list`));
     describe('POST /discuss/topic', postDiscussTopic(db, 'POST', `${host}/discuss/topic`));
+    describe('GET /discuss/topic/detail', getDiscussTopicDetail(db, 'GET', `${host}/discuss/topic/detail`));
 });

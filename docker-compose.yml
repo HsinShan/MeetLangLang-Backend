@@ -10,14 +10,13 @@ services:
         container_name: mll-mysql
         restart: always
         volumes:
-            - /etc/timezone:/etc/timezone:ro
-            - /etc/localtime:/etc/localtime:ro
             - ./db:/docker-entrypoint-initdb.d
         environment:
             MYSQL_ROOT_PASSWORD: P@ssWd
             MYSQL_DATABASE: mllapp
             MYSQL_USER: app
             MYSQL_PASSWORD: mllapp
+            TZ: Asia/Taipei
         command:
             - "--character-set-server=utf8mb4"
             - "--collation-server=utf8mb4_unicode_ci"
@@ -30,11 +29,11 @@ services:
             - mll-mysql
         restart: always
         volumes:
-            - /etc/timezone:/etc/timezone:ro
-            - /etc/localtime:/etc/localtime:ro
             - ./app:/app
             - ./localhost.crt:/localhost.crt
             - ./localhost.key:/localhost.key
+        environment:
+            TZ: Asia/Taipei
         ports:
             - "${APP_PORT}:8181"
         networks:
@@ -51,6 +50,7 @@ services:
         environment:
             PMA_HOST: mll-mysql
             PMA_PORT: 3306
+            TZ: Asia/Taipei
         ports:
             - "8080:80"
         networks:
@@ -59,11 +59,10 @@ services:
         image: node:10.17.0
         container_name: mll-apitest
         volumes:
-            - /etc/timezone:/etc/timezone:ro
-            - /etc/localtime:/etc/localtime:ro
             - ./apitest:/apitest
         environment:
             NODE_TLS_REJECT_UNAUTHORIZED: 0
+            TZ: Asia/Taipei
         networks:
             - mll-backend-net
         working_dir: /apitest

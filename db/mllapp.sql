@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 04 月 19 日 15:36
+-- 產生時間： 2021 年 05 月 03 日 03:04
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- 資料庫： `mllapp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `AnimalInfo`
+--
+
+CREATE TABLE `AnimalInfo` (
+  `animal_id` int(10) NOT NULL,
+  `animal_sex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_kind` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_colour` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_sterilization` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shelter_tel` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shelter_address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_place` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `album_file` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `animal_remark` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -61,37 +80,25 @@ CREATE TABLE `Message` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `PetInfo`
---
-
-CREATE TABLE `AnimalInfo` (
-  `animal_id` int(10) NOT NULL,
-  `animal_sex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `animal_kind` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `animal_colour` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `animal_sterilization` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `shelter_tel` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `shelter_address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `animal_place` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `album_file` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `animal_remark` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- 資料表結構 `User`
 --
 
 CREATE TABLE `User` (
   `uuid` int(8) NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ssoid` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 已傾印資料表的索引
 --
+
+--
+-- 資料表索引 `AnimalInfo`
+--
+ALTER TABLE `AnimalInfo`
+  ADD PRIMARY KEY (`animal_id`);
 
 --
 -- 資料表索引 `example`
@@ -114,16 +121,11 @@ ALTER TABLE `Message`
   ADD KEY `userId` (`userId`);
 
 --
--- 資料表索引 `PetInfo`
---
-ALTER TABLE `AnimalInfo`
-  ADD PRIMARY KEY (`animal_id`);
-
---
 -- 資料表索引 `User`
 --
 ALTER TABLE `User`
-  ADD PRIMARY KEY (`uuid`);
+  ADD PRIMARY KEY (`uuid`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
