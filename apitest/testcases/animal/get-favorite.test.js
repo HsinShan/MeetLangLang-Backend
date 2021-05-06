@@ -1,12 +1,10 @@
-const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const { assert } = require('chai');
-const appConfigs = require('../../configs.js');
+const jwt = require('../../libs/mockToken.js');
 
 const testCases = (db, method, url) => () => {
     // Generate test token
-    const { secret } = appConfigs.token;
-    const token = jwt.sign({ uuid: '1', email: '1@mail.com' }, secret, { expiresIn: '1m' });
+    const token = jwt.generateUserToken();
     // You can define matched data here
     const shouldMatchedData = {
         animal_id: 123,
@@ -19,7 +17,7 @@ const testCases = (db, method, url) => () => {
     beforeEach(async () => {
         // If you want to add sample data into database
         await db('User').insert([
-            { uuid: 1, email: '1@mail.com' },
+            { uuid: 1, email: 'member1@example.com' },
             { uuid: 2, email: '2@mail.com' },
         ]);
 

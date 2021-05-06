@@ -1,12 +1,10 @@
-const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const { assert } = require('chai');
-const appConfigs = require('../../configs.js');
+const jwt = require('../../libs/mockToken.js');
 
 const testCases = (db, method, url) => () => {
     // Generate test token
-    const { secret } = appConfigs.token;
-    const token = jwt.sign({ uuid: 1, email: '1@mail.com' }, secret, { expiresIn: '1m' });
+    const token = jwt.generateUserToken();
     // You can define matched data here
     const shouldMatchedData = {
         success: true,
@@ -16,7 +14,7 @@ const testCases = (db, method, url) => () => {
         // If you want to add sample data into database
         await db('User').insert({
             uuid: 1,
-            email: '1@mail.com',
+            email: 'member1@example.com',
         });
     });
     // Test case 1
@@ -101,6 +99,27 @@ const testCases = (db, method, url) => () => {
         // See: https://www.chaijs.com/api/assert/
         assert.include(data, shouldMatchedData);
     });
+    // Test case 5 - Dynamic test case to test each fields
+    describe('Dynamically Generating Field Tests', function () {
+        const fields = [
+            { sex: 'F' }, { kind: '狗' }, { colour: '黑色' }, { sterilization: 'F' }, { shelter_tel: '4567' },
+            { shelter_address: 'testaddress' }, { animal_place: '新竹市' }, { album_file: 'testurl' }, { animal_remark: 'testremark' },
+        ];
+
+        fields.forEach((e) => {
+            it(`missing ${e.key} field`, async () => {
+                // Call api
+                const { data } = await axios({
+                    method,
+                    url,
+                    headers: { token },
+                    data: { animalId: '123', fields }
+                });
+                assert.include(data, shouldMatchedData);
+            });
+        });
+    });
 };
+}
 
 module.exports = testCases;
