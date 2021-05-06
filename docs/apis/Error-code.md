@@ -1,10 +1,11 @@
 # Error Code
 - 共三碼
-## 第一碼: moudules
+## 第一碼: modules
 1. auth
 2. animal
 3. discuss
 4. user
+5. pet
 ## 第二碼: type
 1. token
 2. parameter
@@ -35,3 +36,7 @@
 |423|field `first_name` is missing.|
 |424|field `name` is missing.|
 |431|insert into User table error|
+|511|token has not been decoded.|
+|522|petname is missing.|
+|523|field `petName` should not be empty.|
+|531|insert pet info into PetInfo table error|
