@@ -90,6 +90,23 @@ CREATE TABLE `User` (
   `ssoid` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `PetInfo`
+--
+
+CREATE TABLE `PetInfo` (
+  `petId` int(10) NOT NULL,
+  `uuid` int(8) NOT NULL,
+  `petName` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `petSex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petAge` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petKind` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petIntro` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petPhoto` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- 已傾印資料表的索引
 --
@@ -128,6 +145,12 @@ ALTER TABLE `User`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- 資料表索引 `PetInfo`
+--
+ALTER TABLE `PetInfo`
+  ADD PRIMARY KEY (`petId`);
+
+--
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
@@ -150,6 +173,11 @@ ALTER TABLE `User`
   MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `PetInfo`
+--
+ALTER TABLE `PetInfo`
+  MODIFY `petId` int(10) NOT NULL AUTO_INCREMENT;
+--
 -- 已傾印資料表的限制式
 --
 
@@ -157,16 +185,22 @@ ALTER TABLE `User`
 -- 資料表的限制式 `FavoriteMap`
 --
 ALTER TABLE `FavoriteMap`
-  ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`animal_id`) REFERENCES `AnimalInfo` (`animal_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`animal_id`) REFERENCES `AnimalInfo` (`animal_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 資料表的限制式 `Message`
 --
 ALTER TABLE `Message`
   ADD CONSTRAINT `relation User table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
+--
+-- 資料表的限制式 `PetInfo`
+--
+ALTER TABLE `PetInfo`
+  ADD CONSTRAINT `relation User table` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
