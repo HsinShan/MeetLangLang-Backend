@@ -40,9 +40,9 @@ class AddPet {
                 if (apiError.message === 'token has not been decoded.') {
                     apiError.errCode = 511;
                 } else if (apiError.message === 'petName is missing.') {
-                    apiError.errCode = 522;
+                    apiError.errCode = 521;
                 } else if (apiError.message === 'field `petName` should not be empty.') {
-                    apiError.errCode = 523;
+                    apiError.errCode = 522;
                 }
                 next(apiError);
             }

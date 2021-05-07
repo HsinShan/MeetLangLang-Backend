@@ -37,6 +37,6 @@
 |424|field `name` is missing.|
 |431|insert into User table error|
 |511|token has not been decoded.|
-|522|petname is missing.|
-|523|field `petName` should not be empty.|
+|521|petname is missing.|
+|522|field `petName` should not be empty.|
 |531|insert pet info into PetInfo table error|
