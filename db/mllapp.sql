@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 05 月 03 日 03:04
+-- 產生時間： 2021 年 05 月 07 日 02:36
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -66,6 +66,20 @@ CREATE TABLE `FavoriteMap` (
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `MesgResponse`
+--
+
+CREATE TABLE `MesgResponse` (
+  `uuid` int(11) NOT NULL,
+  `mesgId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `content` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `Message`
 --
 
@@ -114,6 +128,14 @@ ALTER TABLE `FavoriteMap`
   ADD KEY `animal_id` (`animal_id`);
 
 --
+-- 資料表索引 `MesgResponse`
+--
+ALTER TABLE `MesgResponse`
+  ADD PRIMARY KEY (`uuid`),
+  ADD KEY `relation_user_table` (`userId`),
+  ADD KEY `relation_message_table` (`mesgId`);
+
+--
 -- 資料表索引 `Message`
 --
 ALTER TABLE `Message`
@@ -138,6 +160,12 @@ ALTER TABLE `example`
   MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `MesgResponse`
+--
+ALTER TABLE `MesgResponse`
+  MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `Message`
 --
 ALTER TABLE `Message`
@@ -159,6 +187,13 @@ ALTER TABLE `User`
 ALTER TABLE `FavoriteMap`
   ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`animal_id`) REFERENCES `AnimalInfo` (`animal_id`) ON UPDATE CASCADE;
+
+--
+-- 資料表的限制式 `MesgResponse`
+--
+ALTER TABLE `MesgResponse`
+  ADD CONSTRAINT `relation_message_table` FOREIGN KEY (`mesgId`) REFERENCES `Message` (`uuid`),
+  ADD CONSTRAINT `relation_user_table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`);
 
 --
 -- 資料表的限制式 `Message`
