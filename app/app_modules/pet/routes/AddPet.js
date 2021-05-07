@@ -9,7 +9,7 @@ class AddPet {
                 if (!('user' in req)) throw Error('token has not been decoded.');
                 // Check required fields
                 if (!('petName' in req.body)) throw Error('petName is missing.');
-                const { uuid } = req.user;
+                const { uuid: userId } = req.user;
                 const {
                     petName, petSex, petAge, petKind, petIntro, petPhoto,
                 } = req.body;
@@ -19,7 +19,7 @@ class AddPet {
                 // Add pet info into PetInfo table
                 try {
                     await trx('PetInfo').insert({
-                        uuid,
+                        userId,
                         petName,
                         petSex,
                         petAge,

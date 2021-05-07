@@ -98,7 +98,7 @@ CREATE TABLE `User` (
 
 CREATE TABLE `PetInfo` (
   `petId` int(10) NOT NULL,
-  `uuid` int(8) NOT NULL,
+  `userId` int(8) NOT NULL,
   `petName` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `petSex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `petAge` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -198,7 +198,7 @@ ALTER TABLE `Message`
 -- 資料表的限制式 `PetInfo`
 --
 ALTER TABLE `PetInfo`
-  ADD CONSTRAINT `relation User table` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `relation User table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
