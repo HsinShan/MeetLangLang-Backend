@@ -97,7 +97,7 @@ CREATE TABLE `User` (
 --
 
 CREATE TABLE `PetInfo` (
-  `petId` int(10) NOT NULL,
+  `uuid` int(10) NOT NULL,
   `userId` int(8) NOT NULL,
   `petName` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `petSex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -148,7 +148,7 @@ ALTER TABLE `User`
 -- 資料表索引 `PetInfo`
 --
 ALTER TABLE `PetInfo`
-  ADD PRIMARY KEY (`petId`);
+  ADD PRIMARY KEY (`uuid`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
@@ -176,11 +176,11 @@ ALTER TABLE `User`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `PetInfo`
 --
 ALTER TABLE `PetInfo`
-  MODIFY `petId` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `uuid` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- 已傾印資料表的限制式
 --
-
+ㄘㄛ
 --
 -- 資料表的限制式 `FavoriteMap`
 --
