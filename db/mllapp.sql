@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 05 月 07 日 02:36
+-- 產生時間： 2021 年 05 月 07 日 03:58
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -91,6 +91,14 @@ CREATE TABLE `Message` (
   `content` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- 傾印資料表的資料 `Message`
+--
+
+INSERT INTO `Message` (`uuid`, `userId`, `title`, `time`, `content`) VALUES
+(1, 1, 'Test_1', '2021-05-07 03:25:46', 'test'),
+(2, 1, 'Test_2', '2021-05-07 03:26:10', 'test');
+
 -- --------------------------------------------------------
 
 --
@@ -103,6 +111,13 @@ CREATE TABLE `User` (
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ssoid` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `User`
+--
+
+INSERT INTO `User` (`uuid`, `email`, `name`, `ssoid`) VALUES
+(1, 'allen010301@gmail.com', '吳雨澤', NULL);
 
 --
 -- 已傾印資料表的索引
@@ -132,8 +147,8 @@ ALTER TABLE `FavoriteMap`
 --
 ALTER TABLE `MesgResponse`
   ADD PRIMARY KEY (`uuid`),
-  ADD KEY `relation_user_table` (`userId`),
-  ADD KEY `relation_message_table` (`mesgId`);
+  ADD KEY `relation_message_table` (`mesgId`),
+  ADD KEY `relation_user_table` (`userId`);
 
 --
 -- 資料表索引 `Message`
@@ -169,13 +184,13 @@ ALTER TABLE `MesgResponse`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `Message`
 --
 ALTER TABLE `Message`
-  MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `User`
 --
 ALTER TABLE `User`
-  MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 已傾印資料表的限制式
@@ -192,8 +207,8 @@ ALTER TABLE `FavoriteMap`
 -- 資料表的限制式 `MesgResponse`
 --
 ALTER TABLE `MesgResponse`
-  ADD CONSTRAINT `relation_message_table` FOREIGN KEY (`mesgId`) REFERENCES `Message` (`uuid`),
-  ADD CONSTRAINT `relation_user_table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`);
+  ADD CONSTRAINT `relation_message_table` FOREIGN KEY (`mesgId`) REFERENCES `Message` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relation_user_table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 資料表的限制式 `Message`
