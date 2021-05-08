@@ -40,3 +40,4 @@
 |521|petname is missing.|
 |522|field `petName` should not be empty.|
 |531|insert pet info into PetInfo table error|
+|532|get pet info from PetInfo table error|
