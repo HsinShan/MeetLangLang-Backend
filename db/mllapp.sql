@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： mll-mysql:3306
--- 產生時間： 2021 年 05 月 03 日 03:04
+-- 產生時間： 2021 年 05 月 07 日 05:07
 -- 伺服器版本： 5.6.51
 -- PHP 版本： 7.4.16
 
@@ -66,6 +66,20 @@ CREATE TABLE `FavoriteMap` (
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `MesgResponse`
+--
+
+CREATE TABLE `MesgResponse` (
+  `uuid` int(11) NOT NULL,
+  `mesgId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `content` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `Message`
 --
 
@@ -88,6 +102,23 @@ CREATE TABLE `User` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ssoid` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `PetInfo`
+--
+
+CREATE TABLE `PetInfo` (
+  `uuid` int(10) NOT NULL,
+  `userId` int(8) NOT NULL,
+  `petName` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `petSex` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petAge` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petKind` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petIntro` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `petPhoto` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -114,6 +145,14 @@ ALTER TABLE `FavoriteMap`
   ADD KEY `animal_id` (`animal_id`);
 
 --
+-- 資料表索引 `MesgResponse`
+--
+ALTER TABLE `MesgResponse`
+  ADD PRIMARY KEY (`uuid`),
+  ADD KEY `relation_message_table` (`mesgId`),
+  ADD KEY `relation_user_table` (`userId`);
+
+--
 -- 資料表索引 `Message`
 --
 ALTER TABLE `Message`
@@ -128,6 +167,12 @@ ALTER TABLE `User`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- 資料表索引 `PetInfo`
+--
+ALTER TABLE `PetInfo`
+  ADD PRIMARY KEY (`uuid`);
+
+--
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
@@ -135,6 +180,12 @@ ALTER TABLE `User`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `example`
 --
 ALTER TABLE `example`
+  MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `MesgResponse`
+--
+ALTER TABLE `MesgResponse`
   MODIFY `uuid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -150,23 +201,41 @@ ALTER TABLE `User`
   MODIFY `uuid` int(8) NOT NULL AUTO_INCREMENT;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `PetInfo`
+--
+ALTER TABLE `PetInfo`
+  MODIFY `uuid` int(10) NOT NULL AUTO_INCREMENT;
+--
 -- 已傾印資料表的限制式
 --
-
+ㄘㄛ
 --
 -- 資料表的限制式 `FavoriteMap`
 --
 ALTER TABLE `FavoriteMap`
-  ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`animal_id`) REFERENCES `AnimalInfo` (`animal_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FavoriteMap_ibfk_1` FOREIGN KEY (`uuid`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FavoriteMap_ibfk_2` FOREIGN KEY (`animal_id`) REFERENCES `AnimalInfo` (`animal_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 資料表的限制式 `MesgResponse`
+--
+ALTER TABLE `MesgResponse`
+  ADD CONSTRAINT `relation_message_table` FOREIGN KEY (`mesgId`) REFERENCES `Message` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relation_user_table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 資料表的限制式 `Message`
 --
 ALTER TABLE `Message`
   ADD CONSTRAINT `relation User table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
+--
+-- 資料表的限制式 `PetInfo`
+--
+ALTER TABLE `PetInfo`
+  ADD CONSTRAINT `relation User table` FOREIGN KEY (`userId`) REFERENCES `User` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
