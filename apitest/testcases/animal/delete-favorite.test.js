@@ -20,9 +20,6 @@ const testCases = (db, method, url) => () => {
         await db('AnimalInfo').insert(
             [{
                 animal_id: 123, animal_sex: 'F', animal_kind: '狗', animal_colour: '黑色', animal_sterilization: 'F',
-            },
-            {
-                animal_id: 456, animal_sex: 'M', animal_kind: '貓',
             }]
         );
 
@@ -48,7 +45,7 @@ const testCases = (db, method, url) => () => {
         } catch (err) {
             const { response } = err;
             const { status } = response;
-            assert.notEqual(status, 200);
+            assert.equal(status, 400);
         }
     });
     // Test case 2
@@ -64,8 +61,8 @@ const testCases = (db, method, url) => () => {
             });
         } catch (err) {
             const { response } = err;
-            const { status } = response;
-            assert.notEqual(status, 200);
+            const { data } = response;
+            assert.equal(data.errorCode, 221);
         }
     });
     // Test case 3
@@ -103,6 +100,48 @@ const testCases = (db, method, url) => () => {
             const { response } = err;
             const { status } = response;
             assert.equal(status, 401);
+        }
+    });
+    // Test case 5
+    it('Animal was not saved by user', async () => {
+        // Define request data here
+        const reqData = {
+            animalId: 123456,
+        };
+        // Call api
+        try {
+            await axios({
+                method,
+                url,
+                headers: { token },
+                data: reqData,
+            });
+        } catch (err) {
+            const { response } = err;
+            const { data } = response;
+            console.log(data);
+            assert.equal(data.errorCode, 233);
+        }
+    });
+    // Test case 6
+    it('Delete animal from animal table unsuccessful ', async () => {
+        // Define request data here
+        const reqData = {
+            animalId: 456,
+        };
+        // Call api
+        try {
+            await axios({
+                method,
+                url,
+                headers: { token },
+                data: reqData,
+            });
+        } catch (err) {
+            const { response } = err;
+            const { data } = response;
+            console.log(data);
+            assert.equal(data.errorCode, 234);
         }
     });
 };

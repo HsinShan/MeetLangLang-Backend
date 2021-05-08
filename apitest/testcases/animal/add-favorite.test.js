@@ -34,7 +34,7 @@ const testCases = (db, method, url) => () => {
         } catch (err) {
             const { response } = err;
             const { status } = response;
-            assert.notEqual(status, 200);
+            assert.equal(status, 400);
         }
     });
     // Test case 2
@@ -50,8 +50,8 @@ const testCases = (db, method, url) => () => {
             });
         } catch (err) {
             const { response } = err;
-            const { status } = response;
-            assert.notEqual(status, 200);
+            const { data } = response;
+            assert.equal(data.errorCode, 221);
         }
     });
     // Test case 3
@@ -100,26 +100,36 @@ const testCases = (db, method, url) => () => {
         assert.include(data, shouldMatchedData);
     });
     // Test case 5 - Dynamic test case to test each fields
-    describe('Dynamically Generating Field Tests', function () {
+    describe('Dynamically Missing Field Tests', () => {
+        // Declare fields to be tested
         const fields = [
-            { sex: 'F' }, { kind: '狗' }, { colour: '黑色' }, { sterilization: 'F' }, { shelter_tel: '4567' },
-            { shelter_address: 'testaddress' }, { animal_place: '新竹市' }, { album_file: 'testurl' }, { animal_remark: 'testremark' },
+            { sex: 'F' },
+            { kind: '狗' },
+            { colour: '黑色' },
+            { sterilization: 'F' },
+            { shelter_tel: '4567' },
+            { shelter_address: 'testaddress' },
+            { animal_place: '新竹市' },
+            { album_file: 'testurl' },
+            { animal_remark: 'testremark' },
         ];
 
-        fields.forEach((e) => {
-            it(`missing ${e.key} field`, async () => {
+        // Delete each field on loop
+        for (let i = 0; i < fields.length; i += 1) {
+            const newfields = fields.slice();
+            newfields.splice(i, 1);
+            it(`Missing ${Object.keys(fields[i])[0]} field`, async () => {
                 // Call api
                 const { data } = await axios({
                     method,
                     url,
                     headers: { token },
-                    data: { animalId: '123', fields }
+                    data: { animalId: i, newfields },
                 });
                 assert.include(data, shouldMatchedData);
             });
-        });
+        }
     });
 };
-}
 
 module.exports = testCases;

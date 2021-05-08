@@ -34,8 +34,6 @@ class DeleteFavorite {
                         err.errCode = 234;
                         throw err;
                     }
-                } else {
-                    throw Error('Animal data is not in AnimalInfo table.');
                 }
                 await trx.commit();
                 res.status(200).json({
