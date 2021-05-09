@@ -47,4 +47,4 @@
 |622|field `content` is missing.|
 |623|field `title` should not be empty.|
 |624|field `content` should not be empty.|
-|631|insert into Message table error|
+|631|insert into MesgResponse table error|
