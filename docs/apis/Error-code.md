@@ -6,6 +6,7 @@
 3. discuss
 4. user
 5. pet
+6. Response
 ## 第二碼: type
 1. token
 2. parameter
@@ -40,3 +41,10 @@
 |521|petname is missing.|
 |522|field `petName` should not be empty.|
 |531|insert pet info into PetInfo table error|
+|532|get pet info from PetInfo table error|
+|611|token has not been decoded.|
+|621|field `title` is missing.|
+|622|field `content` is missing.|
+|623|field `title` should not be empty.|
+|624|field `content` should not be empty.|
+|631|insert into MesgResponse table error|

@@ -119,7 +119,6 @@ const testCases = (db, method, url) => () => {
         } catch (err) {
             const { response } = err;
             const { data } = response;
-            console.log(data);
             assert.equal(data.errorCode, 233);
         }
     });

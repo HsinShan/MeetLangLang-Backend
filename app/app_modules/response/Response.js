@@ -1,20 +1,18 @@
 const express = require('express');
-const AddPet = require('./routes/AddPet.js');
-const GetPet = require('./routes/GetPet.js');
+const AddResponse = require('./routes/AddResponse.js');
 // Middlewares
 const AuthMiddleware = require('../user/middlewares/AuthMiddleware.js');
 
-class Pet {
+class Response {
     constructor(app) {
         this.app = app;
     }
 
     static router() {
         const router = express.Router();
-        router.post('', AuthMiddleware.verify(), AddPet.route());
-        router.get('/info/:userId', GetPet.route());
+        router.post('', AuthMiddleware.verify(), AddResponse.route());
         return router;
     }
 }
 
-module.exports = Pet;
+module.exports = Response;

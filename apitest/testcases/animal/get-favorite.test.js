@@ -48,7 +48,7 @@ const testCases = (db, method, url) => () => {
         } catch (err) {
             const { response } = err;
             const { status } = response;
-            assert.notEqual(status, 200);
+            assert.equal(status, 400);
         }
     });
     // Test case 2

@@ -100,7 +100,7 @@ const testCases = (db, method, url) => () => {
         assert.include(data, shouldMatchedData);
     });
     // Test case 5 - Dynamic test case to test each fields
-    describe('Dynamically Missing Field Tests', () => {
+    describe('Missing Field Tests', () => {
         // Declare fields to be tested
         const fields = [
             { sex: 'F' },
