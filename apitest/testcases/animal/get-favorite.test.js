@@ -3,8 +3,6 @@ const { assert } = require('chai');
 const jwt = require('../../libs/mockToken.js');
 
 const testCases = (db, method, url) => () => {
-    // Generate test token
-    const token = jwt.generateUserToken();
     // You can define matched data here
     const shouldMatchedData = {
         animal_id: 123,
@@ -53,6 +51,7 @@ const testCases = (db, method, url) => () => {
     });
     // Test case 2
     it('Check returned animal info', async () => {
+        const token = jwt.generateUserToken();
         // Call api
         const { data } = await axios({
             method,

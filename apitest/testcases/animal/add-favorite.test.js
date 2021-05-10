@@ -3,8 +3,6 @@ const { assert } = require('chai');
 const jwt = require('../../libs/mockToken.js');
 
 const testCases = (db, method, url) => () => {
-    // Generate test token
-    const token = jwt.generateUserToken();
     // You can define matched data here
     const shouldMatchedData = {
         success: true,
@@ -39,6 +37,7 @@ const testCases = (db, method, url) => () => {
     });
     // Test case 2
     it('Reject if animalId is missing', async () => {
+        const token = jwt.generateUserToken();
         // Define request data here
         // Call api
         try {
@@ -80,6 +79,7 @@ const testCases = (db, method, url) => () => {
     });
     // Test case 4
     it('Check add favorite animal process', async () => {
+        const token = jwt.generateUserToken();
         // Define request data here
         const reqData = {
             animalId: 123,
@@ -101,6 +101,7 @@ const testCases = (db, method, url) => () => {
     });
     // Test case 5 - Dynamic test case to test each fields
     describe('Missing Field Tests', () => {
+        const token = jwt.generateUserToken();
         // Declare fields to be tested
         const fields = [
             { sex: 'F' },
@@ -124,7 +125,7 @@ const testCases = (db, method, url) => () => {
                     method,
                     url,
                     headers: { token },
-                    data: { animalId: i, newfields },
+                    data: { animalId: i, ...newfields },
                 });
                 assert.include(data, shouldMatchedData);
             });
