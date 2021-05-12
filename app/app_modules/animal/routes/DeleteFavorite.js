@@ -21,7 +21,6 @@ class DeleteFavorite {
                     }
                 } catch (err) {
                     await trx.rollback();
-                    err.errCode = 233;
                     throw err;
                 }
                 // Check if need to delete animal in AnimalInfo table
@@ -34,8 +33,6 @@ class DeleteFavorite {
                         err.errCode = 234;
                         throw err;
                     }
-                } else {
-                    throw Error('Animal data is not in AnimalInfo table.');
                 }
                 await trx.commit();
                 res.status(200).json({
@@ -44,6 +41,8 @@ class DeleteFavorite {
             } catch (apiError) {
                 if (apiError.message === 'token has not been decoded.') {
                     apiError.errCode = 211;
+                } else if (apiError.message === 'Animal was not saved by user.') {
+                    apiError.errCode = 233;
                 } else {
                     apiError.errCode = 221;
                 }
