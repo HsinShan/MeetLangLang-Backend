@@ -103,29 +103,31 @@ const testCases = (db, method, url) => () => {
     describe('Missing Field Tests', () => {
         const token = jwt.generateUserToken();
         // Declare fields to be tested
-        const fields = [
-            { sex: 'F' },
-            { kind: '狗' },
-            { colour: '黑色' },
-            { sterilization: 'F' },
-            { shelter_tel: '4567' },
-            { shelter_address: 'testaddress' },
-            { animal_place: '新竹市' },
-            { album_file: 'testurl' },
-            { animal_remark: 'testremark' },
-        ];
-
+        const fields = {
+            sex: 'F',
+            kind: '狗',
+            colour: '黑色',
+            sterilization: 'F',
+            shelter_tel: '4567',
+            shelter_address: 'testaddress',
+            animal_place: '新竹市',
+            album_file: 'testurl',
+            animal_remark: 'testremark',
+        };
+        const fieldKey = Object.keys(fields);
         // Delete each field on loop
-        for (let i = 0; i < fields.length; i += 1) {
-            const newfields = fields.slice();
-            newfields.splice(i, 1);
-            it(`Missing ${Object.keys(fields[i])[0]} field`, async () => {
+        for (let i = 0; i < fieldKey.length; i += 1) {
+            const newfields = { ...fields };
+            delete newfields[fieldKey[i]];
+            it(`Missing ${fieldKey[i]} field`, async () => {
                 // Call api
+                const animalId = { animalId: i };
+                const sendData = { ...animalId, ...newfields };
                 const { data } = await axios({
                     method,
                     url,
                     headers: { token },
-                    data: { animalId: i, ...newfields },
+                    data: sendData,
                 });
                 assert.include(data, shouldMatchedData);
             });
