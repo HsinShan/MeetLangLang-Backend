@@ -5,6 +5,8 @@ stages:
 
 dev-commit-test:
   stage: standard-test
+  tags:
+    - sdm2021group3-dind
   image: node:10.17.0
   only:
     - /^feature\/.*$/
@@ -19,6 +21,8 @@ dev-commit-test:
 
 dev-codingstyle-test:
   stage: standard-test
+  tags:
+    - sdm2021group3-dind
   image: node:10.17.0
   only:
     - /^feature\/.*$/
@@ -39,6 +43,9 @@ dev-api-test:
   variables:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2375"
+    DOCKER_TLS_CERTDIR: ""
+  tags:
+    - sdm2021group3-dind
   image: docker/compose:alpine-1.29.1
   only:
     - merge_requests
