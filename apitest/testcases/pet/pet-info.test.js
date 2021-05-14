@@ -42,7 +42,6 @@ const testCases = (db, method, url) => () => {
             assert.isEmpty(data);
         });
 
-
         it('Check response when having petInfo data in DB', async () => {
             // before this case
             await db('PetInfo').insert({
