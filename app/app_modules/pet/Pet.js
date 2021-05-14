@@ -12,7 +12,7 @@ class Pet {
     static router() {
         const router = express.Router();
         router.post('', AuthMiddleware.verify(), AddPet.route());
-        router.get('/info/:userId', GetPet.route());
+        router.get('/info', AuthMiddleware.verify(), GetPet.route());
         return router;
     }
 }
