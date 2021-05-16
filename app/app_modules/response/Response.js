@@ -12,7 +12,7 @@ class Response {
     static router() {
         const router = express.Router();
         router.post('', AuthMiddleware.verify(), AddResponse.route());
-        router.get('', GetResponse.route());
+        router.get('/:mesgId', GetResponse.route());
         return router;
     }
 }

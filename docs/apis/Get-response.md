@@ -20,12 +20,12 @@ Get response list of the post(message).
 
 |Name|Type|Description|
 |-|-|-|
+|`mesgId`|int|id of post|
 
 ## JSON body parameters
 
 |Name|Type|Description|
 |-|-|-|
-|`mesgId`|int|id of message post|
 
 ## Response fields
 
