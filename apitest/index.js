@@ -11,6 +11,7 @@ const addAnimalFavorites = require('./testcases/animal/add-favorite.test.js');
 const getDiscussTopic = require('./testcases/discuss/topic-list.test.js');
 const postDiscussTopic = require('./testcases/discuss/topic-add.test.js');
 const getDiscussTopicDetail = require('./testcases/discuss/topic-detail-get.test.js');
+const addPet = require('./testcases/pet/add-pet.test.js');
 
 const db = knex({
     client: 'mysql',
@@ -40,4 +41,5 @@ describe('API testing...', () => {
     describe('GET /discuss/topic/list', getDiscussTopic(db, 'GET', `${host}/discuss/topic/list`));
     describe('POST /discuss/topic', postDiscussTopic(db, 'POST', `${host}/discuss/topic`));
     describe('GET /discuss/topic/detail', getDiscussTopicDetail(db, 'GET', `${host}/discuss/topic/detail`));
+    describe('POST /pet', addPet(db, 'POST', `${host}/pet`));
 });
