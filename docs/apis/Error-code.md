@@ -47,4 +47,7 @@
 |622|field `content` is missing.|
 |623|field `title` should not be empty.|
 |624|field `content` should not be empty.|
+|625|message id is missing|
+|626|field `mesgId` should not be empty.|
 |631|insert into MesgResponse table error|
+|632|get response from MesgResponse table error|
