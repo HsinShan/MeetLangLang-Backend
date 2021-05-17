@@ -48,3 +48,4 @@
 |623|field `title` should not be empty.|
 |624|field `content` should not be empty.|
 |631|insert into MesgResponse table error|
+|632|get response from MesgResponse table error|
