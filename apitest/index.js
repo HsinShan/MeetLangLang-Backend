@@ -13,6 +13,7 @@ const postDiscussTopic = require('./testcases/discuss/topic-add.test.js');
 const getDiscussTopicDetail = require('./testcases/discuss/topic-detail-get.test.js');
 const addPet = require('./testcases/pet/add-pet.test.js');
 const getPetInfo = require('./testcases/pet/pet-info.test.js');
+const postPetDraw = require('./testcases/pet/pet-draw.test.js');
 const postResponse = require('./testcases/response/response-add.test.js');
 
 const db = knex({
@@ -45,5 +46,6 @@ describe('API testing...', () => {
     describe('GET /discuss/topic/detail', getDiscussTopicDetail(db, 'GET', `${host}/discuss/topic/detail`));
     describe('POST /pet', addPet(db, 'POST', `${host}/pet`));
     describe('GET /pet/info', getPetInfo(db, 'Get', `${host}/pet/info`));
+    describe('POST /pet/draw', postPetDraw(db, 'POST', `${host}/pet/draw`));
     describe('POST /response', postResponse(db, 'POST', `${host}/response`));
 });
