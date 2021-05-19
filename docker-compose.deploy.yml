@@ -26,10 +26,9 @@ services:
         volumes:
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
-            - ./localhost.crt:/localhost.crt:ro
-            - ./localhost.key:/localhost.key:ro
-        command: ["sh", "-c", "STAGE=staging \
-            SSL_CERT_FILE=/localhost.crt \
+            - /home/runner/mll-cert/ssl.crt:/localhost.crt:ro
+            - /home/runner/mll-cert/ssl.key:/localhost.key:ro
+        command: ["sh", "-c", "SSL_CERT_FILE=/localhost.crt \
             SSL_KEY_FILE=/localhost.key \
             npm run start"]
         depends_on:

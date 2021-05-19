@@ -68,9 +68,23 @@ dev-api-test:
     - sleep 30
     - docker exec -i mll-apitest npm run apitest
 
-staging-deploy:
+.cross-deploy:
   variables:
-    COMPOSE_CMD: 'VERSION=${CI_COMMIT_SHORT_SHA} docker-compose -f docker-compose.staging.yml'
+    COMPOSE_CMD: 'VERSION=${CI_COMMIT_SHORT_SHA} docker-compose -f docker-compose.deploy.yml'
+  before_script:
+    - pwd
+    - 'eval ${COMPOSE_CMD} down -v'
+    - docker images --filter=reference="mll-backend/*" -q | xargs --no-run-if-empty docker rmi
+  script:
+    - pwd
+    - 'eval ${COMPOSE_CMD} config'
+    - 'eval ${COMPOSE_CMD} build --no-cache --force-rm'
+    - 'eval ${COMPOSE_CMD} up -d'
+    - sleep 30
+    - 'eval ${COMPOSE_CMD} logs mll-api'
+
+staging-deploy:
+  extends: .cross-deploy
   stage: deploy-staging
   tags:
     - sdm2021group3-stagingssh
@@ -79,35 +93,11 @@ staging-deploy:
     - if: '$CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE != "web"'
       variables:
         DEPLOY_STAGE: staging
-  before_script:
-    - pwd
-    - 'eval ${COMPOSE_CMD} down -v'
-    - docker images --filter=reference="mll-backend/*" -q | xargs --no-run-if-empty docker rmi
-  script:
-    - pwd
-    - 'eval ${COMPOSE_CMD} config'
-    - 'eval ${COMPOSE_CMD} build --no-cache --force-rm'
-    - 'eval ${COMPOSE_CMD} up -d'
-    - sleep 30
-    - 'eval ${COMPOSE_CMD} logs mll-api'
 
 prod-deploy:
-  variables:
-    COMPOSE_CMD: 'VERSION=${CI_COMMIT_SHORT_SHA} docker-compose -f docker-compose.prod.yml'
+  extends: .cross-deploy
   stage: deploy-prod
   tags:
     - sdm2021group3-prodssh
   rules:
     - if: '$CI_PIPELINE_SOURCE == "web" && $DEPLOY_STAGE == "prod"'
-  before_script:
-    - pwd
-    - 'eval ${COMPOSE_CMD} down -v'
-    - docker images --filter=reference="mll-backend/*" -q | xargs --no-run-if-empty docker rmi
-  script:
-    - pwd
-    - 'eval ${COMPOSE_CMD} config'
-    - 'eval ${COMPOSE_CMD} build --no-cache --force-rm'
-    - 'eval ${COMPOSE_CMD} up -d'
-    - sleep 30
-    - 'eval ${COMPOSE_CMD} logs mll-api'
-
