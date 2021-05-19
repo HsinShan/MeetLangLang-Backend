@@ -62,20 +62,22 @@ dev-api-test:
     - docker exec -i mll-apitest npm run apitest
 
 prod-deploy:
+  variables:
+    COMPOSE_CMD: 'VERSION=${CI_COMMIT_SHORT_SHA} docker-compose -f docker-compose.prod.yml'
   stage: deploy-prod
   tags:
     - sdm2021group3-prodssh
   only:
     - web
+  before_script:
+    - pwd
+    - 'eval ${COMPOSE_CMD} down -v'
+    - docker images --filter=reference="mll-backend/*" -q | xargs --no-run-if-empty docker rmi
   script:
     - pwd
-    - docker-compose -f docker-compose.prod.yml down -v
-    - echo "start services"
-    - mkdir -p app/node_modules/ app/node_modules/.cache/
-    - docker-compose -f docker-compose.prod.yml up -d
-    - echo "remove unused services"
-    - docker-compose -f docker-compose.prod.yml stop mll-apitest
-    - docker-compose -f docker-compose.prod.yml rm -f mll-apitest
-    - echo "check logs"
+    - 'eval ${COMPOSE_CMD} config'
+    - 'eval ${COMPOSE_CMD} build --no-cache --force-rm'
+    - 'eval ${COMPOSE_CMD} up -d'
     - sleep 30
-    - docker-compose -f docker-compose.prod.yml logs mll-api
+    - 'eval ${COMPOSE_CMD} logs mll-api'
+

@@ -9,17 +9,26 @@ services:
         extends:
             file: docker-compose.base.yml
             service: mll-mysql
+        image: mll-backend/mll-mysql:${VERSION}
+        build:
+            context: ./
+            dockerfile: ./dockerfiles/mll-mysql.dockerfile
     mll-api:
         extends:
             file: docker-compose.base.yml
             service: mll-api
+        image: mll-backend/mll-api:${VERSION}
+        build:
+            context: ./
+            dockerfile: ./dockerfiles/mll-api.dockerfile
+        ports:
+            - "${APP_PORT}:8181"
         volumes:
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
             - /home/runner/mll-cert/ssl.crt:/localhost.crt:ro
             - /home/runner/mll-cert/ssl.key:/localhost.key:ro
-        command: ["sh", "-c", "npm install && \
-            STAGE=prod \
+        command: ["sh", "-c", "STAGE=prod \
             SSL_CERT_FILE=/localhost.crt \
             SSL_KEY_FILE=/localhost.key \
             npm run start"]

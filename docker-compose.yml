@@ -17,8 +17,8 @@ services:
             service: mll-api
         volumes:
             - ./app:/app
-            - ./localhost.crt:/localhost.crt
-            - ./localhost.key:/localhost.key
+            - ./localhost.crt:/localhost.crt:ro
+            - ./localhost.key:/localhost.key:ro
         ports:
             - "${APP_PORT}:8181"
         depends_on:
