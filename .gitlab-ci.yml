@@ -73,8 +73,8 @@ prod-deploy:
   stage: deploy-prod
   tags:
     - sdm2021group3-prodssh
-  only:
-    - web
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" && $DEPLOY_STAGE == "prod"'
   before_script:
     - pwd
     - 'eval ${COMPOSE_CMD} down -v'
