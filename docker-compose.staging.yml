@@ -1,0 +1,42 @@
+version: "2.4"
+
+networks:
+   mll-backend-net:
+        name: mll-backend-net
+
+services:
+    mll-mysql:
+        extends:
+            file: docker-compose.base.yml
+            service: mll-mysql
+        image: mll-backend/mll-mysql:${VERSION}
+        build:
+            context: ./
+            dockerfile: ./dockerfiles/mll-mysql.dockerfile
+    mll-api:
+        extends:
+            file: docker-compose.base.yml
+            service: mll-api
+        image: mll-backend/mll-api:${VERSION}
+        build:
+            context: ./
+            dockerfile: ./dockerfiles/mll-api.dockerfile
+        ports:
+            - "${APP_PORT}:8181"
+        volumes:
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+            - ./localhost.crt:/localhost.crt:ro
+            - ./localhost.key:/localhost.key:ro
+        command: ["sh", "-c", "STAGE=staging \
+            SSL_CERT_FILE=/localhost.crt \
+            SSL_KEY_FILE=/localhost.key \
+            npm run start"]
+        depends_on:
+            - mll-mysql
+    mll-phpmyadmin:
+        extends:
+            file: docker-compose.base.yml
+            service: mll-phpmyadmin
+        ports:
+            - "8080:80"
