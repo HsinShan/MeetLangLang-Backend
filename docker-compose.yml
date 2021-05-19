@@ -1,4 +1,4 @@
-version: "3.5"
+version: "2.4"
 
 networks:
    mll-backend-net:
@@ -6,55 +6,29 @@ networks:
 
 services:
     mll-mysql:
-        image: mysql:5.6.51
-        container_name: mll-mysql
-        restart: always
+        extends:
+            file: docker-compose.base.yml
+            service: mll-mysql
         volumes:
             - ./db:/docker-entrypoint-initdb.d
-        environment:
-            MYSQL_ROOT_PASSWORD: P@ssWd
-            MYSQL_DATABASE: mllapp
-            MYSQL_USER: app
-            MYSQL_PASSWORD: mllapp
-            TZ: Asia/Taipei
-        command:
-            - "--character-set-server=utf8mb4"
-            - "--collation-server=utf8mb4_unicode_ci"
-        networks:
-            - mll-backend-net
     mll-api:
-        image: node:10.17.0
-        container_name: mll-api
-        depends_on:
-            - mll-mysql
-        restart: always
+        extends:
+            file: docker-compose.base.yml
+            service: mll-api
         volumes:
             - ./app:/app
-            - ./localhost.crt:/localhost.crt
-            - ./localhost.key:/localhost.key
-        environment:
-            TZ: Asia/Taipei
+            - ./localhost.crt:/localhost.crt:ro
+            - ./localhost.key:/localhost.key:ro
         ports:
             - "${APP_PORT}:8181"
-        networks:
-            - mll-backend-net
-        working_dir: /app
-        command: ["sh", "-c", "npm install && \
-            SSL_CERT_FILE=/localhost.crt \
-            SSL_KEY_FILE=/localhost.key \
-            npm run start"]
+        depends_on:
+            - mll-mysql
     mll-phpmyadmin:
-        image: phpmyadmin/phpmyadmin:latest
-        container_name: mll-phpmyadmin
-        restart: always
-        environment:
-            PMA_HOST: mll-mysql
-            PMA_PORT: 3306
-            TZ: Asia/Taipei
+        extends:
+            file: docker-compose.base.yml
+            service: mll-phpmyadmin
         ports:
             - "8080:80"
-        networks:
-            - mll-backend-net
     mll-apitest:
         image: node:10.17.0
         container_name: mll-apitest
