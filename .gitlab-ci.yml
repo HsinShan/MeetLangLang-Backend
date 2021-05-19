@@ -76,7 +76,7 @@ staging-deploy:
     - sdm2021group3-stagingssh
   rules:
     - if: '$CI_PIPELINE_SOURCE == "web" && $DEPLOY_STAGE == "staging"'
-    - if: $CI_COMMIT_REF_NAME =~ /master/
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE != "web"'
       variables:
         DEPLOY_STAGE: staging
   before_script:
