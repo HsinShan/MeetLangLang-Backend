@@ -13,6 +13,8 @@ dev-commit-test:
     - /^bugfix\/.*$/
     - /^test\/.*$/
     - merge_requests
+  except:
+    - web
   script:
     - cd ./
     - npm install --save-dev commitlint @commitlint/config-conventional
@@ -29,6 +31,8 @@ dev-codingstyle-test:
     - /^bugfix\/.*$/
     - /^test\/.*$/
     - merge_requests
+  except:
+    - web
   script:
     - cd ./app
     - npm install
@@ -49,6 +53,8 @@ dev-api-test:
   image: docker/compose:alpine-1.29.1
   only:
     - merge_requests
+  except:
+    - web
   services:
     - docker:19.03.0-dind
   before_script:
