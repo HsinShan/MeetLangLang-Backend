@@ -33,11 +33,12 @@ const testCases = (db, method, url) => () => {
             { uuid: 2, animal_id: 456 },
         ]);
     });
+    // Put global vars or functions here
+    const token = jwt.generateUserToken();
     // Positive context
     describe('Positive Testing', () => {
         // Test case 2
         it('Check returned animal info', async () => {
-            const token = jwt.generateUserToken();
             // Call api
             const { data } = await axios({
                 method,

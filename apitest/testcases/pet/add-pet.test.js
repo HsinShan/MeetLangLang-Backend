@@ -4,7 +4,6 @@ const jwt = require('../../libs/mockToken.js');
 
 const testCases = (db, method, url) => () => {
     // You can define matched data here
-    const token = jwt.generateUserToken();
     const shouldMatchedData = {
         success: true,
     };
@@ -16,6 +15,8 @@ const testCases = (db, method, url) => () => {
             email: 'member1@example.com',
         });
     });
+    // Put global vars or functions here
+    const token = jwt.generateUserToken();
     // Positive context
     describe('Positive Testing', () => {
         // Test case 4

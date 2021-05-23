@@ -14,7 +14,6 @@ const testCases = (db, method, url) => () => {
     beforeEach(async () => {
         // If you want to add sample data into database
     });
-
     // Positive context
     describe('Positive Testing', () => {
         it('Check normal response', async () => {

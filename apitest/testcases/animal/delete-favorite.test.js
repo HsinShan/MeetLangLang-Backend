@@ -26,11 +26,12 @@ const testCases = (db, method, url) => () => {
             { uuid: 1, animal_id: 456 },
         ]);
     });
+    // Put global vars or functions here
+    const token = jwt.generateUserToken();
     // Positive context
     describe('Positive Testing', () => {
         // Test case 3
         it('Check deletion process', async () => {
-            const token = jwt.generateUserToken();
             // Define request data here
             const reqData = {
                 animalId: 123,
@@ -71,7 +72,6 @@ const testCases = (db, method, url) => () => {
         });
         // Test case 2
         it('Reject if animalId is missing', async () => {
-            const token = jwt.generateUserToken();
             // Define request data here
             // Call api
             try {
@@ -109,7 +109,6 @@ const testCases = (db, method, url) => () => {
         });
         // Test case 5
         it('Animal was not saved by user', async () => {
-            const token = jwt.generateUserToken();
             // Define request data here
             const reqData = {
                 animalId: 123456,
@@ -130,7 +129,6 @@ const testCases = (db, method, url) => () => {
         });
         // Test case 6
         it('Delete animal from animal table unsuccessful ', async () => {
-            const token = jwt.generateUserToken();
             // Define request data here
             const reqData = {
                 animalId: 456,

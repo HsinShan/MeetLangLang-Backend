@@ -11,6 +11,7 @@ const testCases = (db, method, url) => () => {
     beforeEach(async () => {
         // If you want to add sample data into database
     });
+    // Put global vars or functions here
     // Reused functions
     const logicOfNormalCheck = async () => {
         // Define request data here

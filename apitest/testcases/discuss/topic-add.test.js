@@ -10,15 +10,14 @@ const testCases = (db, method, url) => () => {
     beforeEach(async () => {
         // If you want to add sample data into database
     });
-
+    // Put global vars or functions here
+    const token = jwt.generateUserToken();
     // Positive context
     describe('Positive Testing', () => {
         it('Check normal response', async () => {
             await db('User').insert({
                 email: 'member1@example.com',
             });
-            // Generate token
-            const jwtToken = jwt.generateUserToken();
             // Define test data here
             const testData = {
                 title: 'testTitle',
@@ -29,7 +28,7 @@ const testCases = (db, method, url) => () => {
                 method,
                 url,
                 headers: {
-                    token: jwtToken,
+                    token,
                 },
                 data: testData,
             });
@@ -62,7 +61,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `title` should not be empty.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 title: '',
                 content: 'testContent',
@@ -73,7 +71,7 @@ const testCases = (db, method, url) => () => {
                     method,
                     url,
                     headers: {
-                        token: jwtToken,
+                        token,
                     },
                     data: testData,
                 });
@@ -84,7 +82,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `content` should not be empty.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 title: 'testTitle',
                 content: '',
@@ -95,7 +92,7 @@ const testCases = (db, method, url) => () => {
                     method,
                     url,
                     headers: {
-                        token: jwtToken,
+                        token,
                     },
                     data: testData,
                 });
@@ -106,7 +103,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `title` is missing.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 content: 'testContent',
             };
@@ -116,7 +112,7 @@ const testCases = (db, method, url) => () => {
                     method,
                     url,
                     headers: {
-                        token: jwtToken,
+                        token,
                     },
                     data: testData,
                 });
@@ -127,7 +123,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `content` is missing.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 title: 'testTitle',
             };
@@ -137,7 +132,7 @@ const testCases = (db, method, url) => () => {
                     method,
                     url,
                     headers: {
-                        token: jwtToken,
+                        token,
                     },
                     data: testData,
                 });
