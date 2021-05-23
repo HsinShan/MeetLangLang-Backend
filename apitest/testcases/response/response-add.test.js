@@ -6,7 +6,10 @@ const testCases = (db, method, url) => () => {
     // You can define matched data here
     const shouldMatchedData = {
     };
-
+    // Before test case
+    beforeEach(async () => {
+        // If you want to add sample data into database
+    });
     // Positive context
     describe('Positive Testing', () => {
         it('Check normal response', async () => {

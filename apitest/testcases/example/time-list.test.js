@@ -16,25 +16,30 @@ const testCases = (db, method, url) => () => {
             timestamp: shouldMatchedData.current,
         });
     });
-    // Test case
-    it('Check normal response', async () => {
-        // Define request data here
-        const reqData = {};
-        // Call api
-        const { data } = await axios({
-            method,
-            url,
-            data: reqData,
-        });
-        // Test
-        // See: https://www.chaijs.com/api/assert/
-        assert.isArray(data);
-        assert.include(data[0], {
-            uuid: shouldMatchedData.uuid,
-            name: shouldMatchedData.name,
-            timestamp: shouldMatchedData.current,
+    // Positive context
+    describe('Positive Testing', () => {
+        // Test case
+        it('Check normal response', async () => {
+            // Define request data here
+            const reqData = {};
+            // Call api
+            const { data } = await axios({
+                method,
+                url,
+                data: reqData,
+            });
+            // Test
+            // See: https://www.chaijs.com/api/assert/
+            assert.isArray(data);
+            assert.include(data[0], {
+                uuid: shouldMatchedData.uuid,
+                name: shouldMatchedData.name,
+                timestamp: shouldMatchedData.current,
+            });
         });
     });
+    // Negative context
+    describe('Negative Testing', () => {});
 };
 
 module.exports = testCases;
