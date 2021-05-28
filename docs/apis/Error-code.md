@@ -7,6 +7,7 @@
 4. user
 5. pet
 6. Response
+7. Match
 ## 第二碼: type
 1. token
 2. parameter
@@ -43,9 +44,15 @@
 |531|insert pet info into PetInfo table error|
 |532|get pet info from PetInfo table error|
 |611|token has not been decoded.|
-|621|field `title` is missing.|
+|621|field `mesgId` is missing.|
 |622|field `content` is missing.|
-|623|field `title` should not be empty.|
+|623|field `mesgId` should not be empty.|
 |624|field `content` should not be empty.|
 |631|insert into MesgResponse table error|
 |632|get response from MesgResponse table error|
+|711|token has not been decoded.|
+|721|field `receiverId` is missing.|
+|722|field `receiverId` should not be empty.|
+|731|insert into Match table error|
+|732|get time from Match table error|
+|733|get match data from Match table error|
