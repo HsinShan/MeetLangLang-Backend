@@ -1,4 +1,4 @@
-# GET /discuss/topic/detail/:messageId
+# GET /pet/info
 A function with userId that returns pet info from the user .
 
 ## Authentication
@@ -9,6 +9,7 @@ A function with userId that returns pet info from the user .
 ## Headers
 |Name|Type|Description|
 |-|-|-|
+|`token`|string|The logged in user token|
 
 ## Query parameters
 
@@ -19,7 +20,6 @@ A function with userId that returns pet info from the user .
 
 |Name|Type|Description|
 |-|-|-|
-|`userId`|number||
 
 ## JSON body parameters
 
