@@ -15,11 +15,14 @@ const testCases = (db, method, url) => () => {
             email: 'member1@example.com',
         });
 
-        await db('AnimalInfo').insert(
-            [{
+        await db('AnimalInfo').insert([
+            {
                 animal_id: 123, animal_sex: 'F', animal_kind: '狗', animal_colour: '黑色', animal_sterilization: 'F',
-            }]
-        );
+            },
+            {
+                animal_id: 456, animal_sex: 'M', animal_kind: '貓', animal_colour: '白色', animal_sterilization: 'F',
+            },
+        ]);
 
         await db('FavoriteMap').insert([
             { uuid: 1, animal_id: 123 },
