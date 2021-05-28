@@ -47,6 +47,7 @@ class SignInOrUpFb {
                 res.status(200).json({
                     token,
                     firstName: data.first_name,
+                    fullName: data.name,
                 });
             } catch (apiError) {
                 if (apiError.message === 'field `accessToken` is missing.') {
