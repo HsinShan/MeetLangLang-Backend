@@ -39,3 +39,4 @@ Draw a pet-card.
 |`petKind`|string|Kind of the pet|
 |`petIntro`|string|Introduction of the pet|
 |`petPhoto`|string|Photo of the pet|
+|`userId`|string|UserId of the pet owner|
