@@ -208,7 +208,6 @@ ALTER TABLE `PetInfo`
 --
 -- 已傾印資料表的限制式
 --
-ㄘㄛ
 --
 -- 資料表的限制式 `FavoriteMap`
 --
