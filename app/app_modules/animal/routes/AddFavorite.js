@@ -1,3 +1,4 @@
+const validator = require('validator');
 const AppDb = require('../../system/libs/AppDb.js');
 
 class AddFavorite {
@@ -8,6 +9,8 @@ class AddFavorite {
                 if (!('user' in req)) throw Error('token has not been decoded.');
                 // Check required fields
                 if (!('animalId' in req.body)) throw Error('animalId is missing');
+                // Check formats of required fields
+                if (!validator.isInt(req.body.animalId.toString())) throw Error('field `animalId` should be int.');
                 const trx = await AppDb.db.transaction();
                 const userId = req.user.uuid;
                 // Insert animal info into animalInfo table

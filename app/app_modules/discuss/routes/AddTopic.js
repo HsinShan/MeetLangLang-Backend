@@ -12,8 +12,8 @@ class AddTopic {
                 if (!('content' in req.body)) throw Error('field `content` is missing.');
                 // Check formats of required fields
                 const { title, content } = req.body;
-                if (validator.isEmpty(title)) throw Error('field `title` should not be empty.');
-                if (validator.isEmpty(content)) throw Error('field `content` should not be empty.');
+                if (validator.isEmpty(title, { ignore_whitespace: true })) throw Error('field `title` should not be empty.');
+                if (validator.isEmpty(content, { ignore_whitespace: true })) throw Error('field `content` should not be empty.');
                 // Logics
                 const { uuid: userId } = req.user;
                 const trx = await AppDb.db.transaction();
