@@ -14,7 +14,7 @@ class SignInOrUp {
                 let list = await trx('User').where('email', email).select();
                 if (list.length === 0) {
                     const name = 'E-' + Math.random().toString(36).substring(2);
-                    const fullName name = `EmailUser ${name}`;
+                    const fullName = `EmailUser ${name}`;
                     try {
                         await trx('User').insert({
                             email: req.body.email,
