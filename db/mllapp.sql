@@ -100,7 +100,7 @@ CREATE TABLE `Message` (
   `userId` int(8) NOT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `content` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
+  `content` TEXT COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
