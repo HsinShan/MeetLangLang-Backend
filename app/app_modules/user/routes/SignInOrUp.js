@@ -13,9 +13,12 @@ class SignInOrUp {
                 const trx = await AppDb.db.transaction();
                 let list = await trx('User').where('email', email).select();
                 if (list.length === 0) {
+                    const name = 'E-' + Math.random().toString(36).substring(2);
+                    const fullName name = `EmailUser ${name}`;
                     try {
                         await trx('User').insert({
                             email: req.body.email,
+                            name: fullName,
                         });
                         list = await trx('User').where('email', email).select();
                     } catch (err) {
@@ -32,6 +35,8 @@ class SignInOrUp {
                 const token = jwt.sign(payload, secret, { expiresIn });
                 res.status(200).json({
                     token,
+                    fullName: list[0].name,
+                    firstName: list[0].name.split(' ')[1],
                 });
             } catch (apiError) {
                 next(apiError);
