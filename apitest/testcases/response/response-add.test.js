@@ -6,7 +6,12 @@ const testCases = (db, method, url) => () => {
     // You can define matched data here
     const shouldMatchedData = {
     };
-
+    // Before test case
+    beforeEach(async () => {
+        // If you want to add sample data into database
+    });
+    // Generate token
+    const jwtToken = jwt.generateUserToken();
     // Positive context
     describe('Positive Testing', () => {
         it('Check normal response', async () => {
@@ -19,8 +24,6 @@ const testCases = (db, method, url) => () => {
                 title: 'testTitle',
                 content: 'testContent',
             });
-            // Generate token
-            const jwtToken = jwt.generateUserToken();
             // Define test data here
             const reqData = {
                 mesgId: '1',
@@ -42,7 +45,6 @@ const testCases = (db, method, url) => () => {
     // Negative context
     describe('Negative Testing', () => {
         it('token problem.', async () => {
-            const jwtToken = ' ';
             const testData = {
                 mesgId: '1',
                 content: 'testResponseContent',
@@ -53,7 +55,7 @@ const testCases = (db, method, url) => () => {
                     method,
                     url,
                     headers: {
-                        token: jwtToken,
+                        token: ' ',
                     },
                     data: testData,
                 });
@@ -64,7 +66,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `mesgId` should not be empty.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 mesgId: '',
                 content: '-',
@@ -86,7 +87,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `content` should not be empty.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 mesgId: '1',
                 content: '',
@@ -108,7 +108,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `mesgId` is missing.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 content: 'testResponseContent',
             };
@@ -129,7 +128,6 @@ const testCases = (db, method, url) => () => {
             }
         });
         it('field `content` is missing.', async () => {
-            const jwtToken = jwt.generateUserToken();
             const testData = {
                 mesgId: '1',
             };

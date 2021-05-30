@@ -11,6 +11,7 @@ const testCases = (db, method, url) => () => {
     beforeEach(async () => {
         // If you want to add sample data into database
     });
+    // Put global vars or functions here
     // Reused functions
     const logicOfNormalCheck = async () => {
         // Define request data here
@@ -38,27 +39,33 @@ const testCases = (db, method, url) => () => {
             email: shouldMatchedData.email,
         });
     };
-    // Test case 1
-    it('Unregistered user login', logicOfNormalCheck);
-    // Test case 2
-    it('Registered user login', logicOfNormalCheck);
-    // Test case 3
-    it('Reject if required field are missing', async () => {
-        // Define request data here
-        const reqData = {};
-        // Call api
-        try {
-            await axios({
-                method,
-                url,
-                data: reqData,
-            });
-        } catch (err) {
-            const { response } = err;
-            const { status } = response;
-            // Test 1
-            assert.notEqual(status, 200);
-        }
+    // Positive context
+    describe('Positive Testing', () => {
+        // Test case 1
+        it('Unregistered user login', logicOfNormalCheck);
+        // Test case 2
+        it('Registered user login', logicOfNormalCheck);
+    });
+    // Negative context
+    describe('Negative Testing', () => {
+        // Test case 3
+        it('Reject if required field are missing', async () => {
+            // Define request data here
+            const reqData = {};
+            // Call api
+            try {
+                await axios({
+                    method,
+                    url,
+                    data: reqData,
+                });
+            } catch (err) {
+                const { response } = err;
+                const { status } = response;
+                // Test 1
+                assert.notEqual(status, 200);
+            }
+        });
     });
 };
 

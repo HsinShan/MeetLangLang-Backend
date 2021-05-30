@@ -33,40 +33,47 @@ const testCases = (db, method, url) => () => {
             { uuid: 2, animal_id: 456 },
         ]);
     });
-    // Test case 1
-    it('Reject if token is missing', async () => {
-        // Define request data here
-        // Call api
-        try {
-            await axios({
+    // Put global vars or functions here
+    const token = jwt.generateUserToken();
+    // Positive context
+    describe('Positive Testing', () => {
+        // Test case 2
+        it('Check returned animal info', async () => {
+            // Call api
+            const { data } = await axios({
                 method,
                 url,
-                headers: {},
+                headers: { token },
             });
-        } catch (err) {
-            const { response } = err;
-            const { status } = response;
-            assert.equal(status, 400);
-        }
-    });
-    // Test case 2
-    it('Check returned animal info', async () => {
-        const token = jwt.generateUserToken();
-        // Call api
-        const { data } = await axios({
-            method,
-            url,
-            headers: { token },
+            // Test
+            // See: https://www.chaijs.com/api/assert/
+            assert.isArray(data.animalInfo);
+            assert.include(data.animalInfo[0], {
+                animal_id: shouldMatchedData.animal_id,
+                animal_sex: shouldMatchedData.animal_sex,
+                animal_kind: shouldMatchedData.animal_kind,
+                animal_colour: shouldMatchedData.animal_colour,
+                animal_sterilization: shouldMatchedData.animal_sterilization,
+            });
         });
-        // Test
-        // See: https://www.chaijs.com/api/assert/
-        assert.isArray(data.animalInfo);
-        assert.include(data.animalInfo[0], {
-            animal_id: shouldMatchedData.animal_id,
-            animal_sex: shouldMatchedData.animal_sex,
-            animal_kind: shouldMatchedData.animal_kind,
-            animal_colour: shouldMatchedData.animal_colour,
-            animal_sterilization: shouldMatchedData.animal_sterilization,
+    });
+    // Negative context
+    describe('Negative Testing', () => {
+        // Test case 1
+        it('Reject if token is missing', async () => {
+            // Define request data here
+            // Call api
+            try {
+                await axios({
+                    method,
+                    url,
+                    headers: {},
+                });
+            } catch (err) {
+                const { response } = err;
+                const { status } = response;
+                assert.equal(status, 400);
+            }
         });
     });
 };

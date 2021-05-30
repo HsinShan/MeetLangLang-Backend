@@ -20,13 +20,13 @@ const testCases = (db, method, url) => () => {
             email: 'member1@example.com',
         });
     });
+    // Generate token
+    const jwtToken = jwt.generateUserToken();
     // Positive context
     describe('Positive Testing', () => {
         it('Check response when no petInfo data in DB', async () => {
             // Define request data here
             const reqData = {};
-            // Generate token
-            const jwtToken = jwt.generateUserToken();
             // Call api
             const { data } = await axios({
                 method,
@@ -55,8 +55,6 @@ const testCases = (db, method, url) => () => {
             });
             // Define request data here
             const reqData = {};
-            // Generate token
-            const jwtToken = jwt.generateUserToken();
             // Call api
             const { data } = await axios({
                 method,
@@ -83,7 +81,6 @@ const testCases = (db, method, url) => () => {
     // Negative context
     describe('Negative Testing', () => {
         it('token problem.', async () => {
-            const jwtToken = ' ';
             const reqData = {};
             // Call api
             try {
@@ -91,7 +88,7 @@ const testCases = (db, method, url) => () => {
                     method,
                     url,
                     headers: {
-                        token: jwtToken,
+                        token: ' ',
                     },
                     data: reqData,
                 });
