@@ -48,10 +48,6 @@ const testCases = (db, method, url) => () => {
             });
             assert.equal(data[0].time.substring(0, 10), shouldMatchedData.time);
         });
-    });
-
-    // Negative context
-    describe('Negative Testing', () => {
         it('Post has no responses', async () => {
             const { data } = await axios({
                 method,
@@ -59,6 +55,10 @@ const testCases = (db, method, url) => () => {
             });
             assert.lengthOf(data, 0, 'Array is not empty');
         });
+    });
+
+    // Negative context
+    describe('Negative Testing', () => {
         it('Param mesgId is incorrect', async () => {
             try {
                 await axios({
