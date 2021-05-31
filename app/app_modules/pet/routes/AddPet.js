@@ -14,7 +14,7 @@ class AddPet {
                     petName, petSex, petAge, petKind, petIntro, petPhoto,
                 } = req.body;
                 // Check format of required field
-                if (validator.isEmpty(req.body.petName)) throw Error('field `petName` should not be empty.');
+                if (validator.isEmpty(req.body.petName, { ignore_whitespace: true })) throw Error('field `petName` should not be empty.');
                 const trx = await AppDb.db.transaction();
                 // Add pet info into PetInfo table
                 try {

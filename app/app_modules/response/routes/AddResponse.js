@@ -12,8 +12,8 @@ class AddResponse {
                 if (!('content' in req.body)) throw Error('field `content` is missing.');
                 // Check formats of required fields
                 const { mesgId, content } = req.body;
-                if (validator.isEmpty(mesgId)) throw Error('field `mesgId` should not be empty.');
-                if (validator.isEmpty(content)) throw Error('field `content` should not be empty.');
+                if (validator.isEmpty(content, { ignore_whitespace: true })) throw Error('field `content` should not be empty.');
+                if (!validator.isInt(mesgId.toString())) throw Error('field `mesgId` should not be int.');
                 // Logics
                 const { uuid: userId } = req.user;
                 const trx = await AppDb.db.transaction();

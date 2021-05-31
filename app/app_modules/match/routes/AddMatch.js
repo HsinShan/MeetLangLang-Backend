@@ -11,7 +11,7 @@ class AddMatch {
                 if (!('receiverId' in req.body)) throw Error('field `receiverId` is missing.');
                 // Check formats of required fields
                 const { receiverId } = req.body;
-                if (validator.isEmpty(receiverId)) throw Error('field `mesgId` should not be empty.');
+                if (!validator.isInt(receiverId.toString())) throw Error('field `receiverId` should be int.');
                 // Logics
                 const { uuid: senderId } = req.user;
                 const trx = await AppDb.db.transaction();
