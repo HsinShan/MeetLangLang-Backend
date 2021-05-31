@@ -20,6 +20,7 @@ const testCases = (db, method, url) => () => {
         await db('Message').insert([
             { userId: '1', title: 'testTitle1', content: 'testPost1' },
             { userId: '1', title: 'testTitle2', content: 'testPost2' },
+            { userId: '1', title: 'testTitle3', content: 'testPost3' },
         ]);
 
         await db('MesgResponse').insert([
@@ -30,6 +31,7 @@ const testCases = (db, method, url) => () => {
 
     // Put global vars or functions here
     const pathVar = { mesgId: 1 };
+    const negVar = { mesgId: 3 };
 
     // Positive context
     describe('Positive Testing', () => {
@@ -50,6 +52,13 @@ const testCases = (db, method, url) => () => {
 
     // Negative context
     describe('Negative Testing', () => {
+        it('Post has no responses', async () => {
+            const { data } = await axios({
+                method,
+                url: `${url}/${negVar.mesgId}`,
+            });
+            assert.lengthOf(data, 0, 'Array is not empty');
+        });
         it('Param mesgId is incorrect', async () => {
             try {
                 await axios({
