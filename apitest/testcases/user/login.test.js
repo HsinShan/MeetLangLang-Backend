@@ -27,6 +27,8 @@ const testCases = (db, method, url) => () => {
         // See: https://www.chaijs.com/api/assert/
         // Test 1
         assert.isTrue('token' in data);
+        assert.isTrue('firstName' in data);
+        assert.isTrue('fullName' in data);
         // Test 2
         const { token } = data;
         const decodedToken = Buffer.from(token.split('.')[1], 'base64').toString();
@@ -34,10 +36,8 @@ const testCases = (db, method, url) => () => {
         assert.isTrue('email' in objToken);
         assert.isTrue('uuid' in objToken);
         // Test 3
-        assert.include(objToken, {
-            uuid: shouldMatchedData.uuid,
-            email: shouldMatchedData.email,
-        });
+        assert.equal(objToken.uuid, shouldMatchedData.uuid);
+        assert.equal(objToken.email, shouldMatchedData.email);
     };
     // Positive context
     describe('Positive Testing', () => {
